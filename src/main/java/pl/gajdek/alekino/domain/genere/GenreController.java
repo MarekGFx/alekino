@@ -1,4 +1,4 @@
-package pl.gajdek.alekino.domain.controllers;
+package pl.gajdek.alekino.domain.genere;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

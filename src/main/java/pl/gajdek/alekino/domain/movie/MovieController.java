@@ -1,4 +1,4 @@
-package pl.gajdek.alekino.domain.controllers;
+package pl.gajdek.alekino.domain.movie;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
