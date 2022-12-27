@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0004-1" author="gajdek">
+        <createTable tableName="seat">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="is_Busy" type="Boolean" />
+            <column name="position_row" type="INT"/>
+            <column name="position_col" type="INT"/>
+            <column name="seats_status" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
