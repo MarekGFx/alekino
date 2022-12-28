@@ -24,6 +24,10 @@ public class Genre {
     }
 
     public void setName(String name) {
+        if (name == null || name.equals("")) {
+            throw new NullPointerException("The genre name can't be null");
+        }
+
         this.name = name;
     }
 
