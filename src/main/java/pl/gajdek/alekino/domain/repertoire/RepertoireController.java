@@ -9,7 +9,7 @@ import java.util.List;
 @RestController
 public class RepertoireController {
 
-    @GetMapping("/repertuar")
+    @GetMapping("/repertoire")
     List<Repertoire> getCurrentDayRepertoire(){
         throw new IllegalArgumentException("Tu będzie repertuar na aktualny dzień!!!");
     }

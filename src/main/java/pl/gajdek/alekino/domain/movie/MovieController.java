@@ -33,12 +33,12 @@ public class MovieController {
         return movieService.findAllPremiere();
     }
 
-    @GetMapping("/gatunek/{name}")
+    @GetMapping("/movies/genre/{name}")
     public List<MovieDto> getMoviesByGenre(String name){
         return movieService.findMovieByGenreName(name);
     }
 
-    @PostMapping("/movie/dodaj-film")
+    @PostMapping("/movies/add-movie")
     public void addMovie(MovieDto movie){
         movieService.addMovie(movie);
     }

@@ -20,12 +20,12 @@ public class GenreController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/gatunki-filmowe")
+    @GetMapping("/genres")
     public List<GenreDto> getGenres(){
         return genreService.findAllGenres();
     }
 
-    @PostMapping("/gatunki-filmowe/dodaj-gatunek")
+    @PostMapping("/genres/add-genre")
     public void addGenre(GenreDto genre){
         genreService.addGenre(genre);
     }
