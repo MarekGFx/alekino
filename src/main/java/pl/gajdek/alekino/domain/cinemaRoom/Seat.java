@@ -11,7 +11,7 @@ public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Boolean isBusy; //TODO czemu obiekt? czy prymityw by nie wystarczyl?
+    private boolean isBusy; //TODO czemu obiekt? czy prymityw by nie wystarczyl?  // done
     private int positionRow; //TODO walidacja na setterach
     private int positionCol;
     private SeatStatus seatsStatus;
@@ -24,7 +24,7 @@ public class Seat {
         this.id = id;
     }
 
-    public Boolean getBusy() {
+    public boolean getBusy() {
         return isBusy;
     }
 
@@ -37,6 +37,8 @@ public class Seat {
     }
 
     public void setPositionRow(int positionRow) {
+        if (positionRow < 0)
+            throw new IllegalArgumentException("Row should be a positive number");
         this.positionRow = positionRow;
     }
 
@@ -45,6 +47,8 @@ public class Seat {
     }
 
     public void setPositionCol(int positionCol) {
+        if (positionCol < 0)
+            throw new IllegalArgumentException("Column should be a positive number");
         this.positionCol = positionCol;
     }
 
@@ -53,6 +57,11 @@ public class Seat {
     }
 
     public void setSeatsStatus(SeatStatus seatsStatus) {
+        if (!seatsStatus.equals(SeatStatus.DISABLED)
+                || !seatsStatus.equals(SeatStatus.VIP)
+                || !seatsStatus.equals(SeatStatus.NORMAL)){
+            System.out.println("There is no such type of seat");
+        }
         this.seatsStatus = seatsStatus;
     }
 }
