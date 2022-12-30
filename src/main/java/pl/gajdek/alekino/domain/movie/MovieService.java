@@ -1,13 +1,17 @@
 package pl.gajdek.alekino.domain.movie;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import pl.gajdek.alekino.domain.genere.Genre;
 import pl.gajdek.alekino.domain.genere.GenreRepository;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
+import pl.gajdek.alekino.exceptions.MovieListByGenreEmptyExceptions;
+import pl.gajdek.alekino.exceptions.MovieNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -25,9 +29,9 @@ public class MovieService {
         return movieRepository.findAll().stream().map(MovieDtoMapper::map).toList();
     }
 
-    public MovieDto getMovie(long id) {
+    public MovieDto getMovie(long id) throws MovieNotFoundException {
         return movieRepository.findById(id).map(MovieDtoMapper::map)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new MovieNotFoundException("movie not found with id: " + id));
     }
 
     public List<MovieDto> findAllPremiere() {
@@ -36,10 +40,14 @@ public class MovieService {
                 .toList();
     }
 
-    public List<MovieDto> findMovieByGenreName(String genre){
-        return movieRepository.findAllByGenre_NameIgnoreCase(genre).stream()
+    public List<MovieDto> findMovieByGenreName(String genre) throws MovieListByGenreEmptyExceptions {
+        List<MovieDto> movieList = movieRepository.findAllByGenre_NameIgnoreCase(genre).stream()
                 .map(MovieDtoMapper::map)
                 .toList();
+        if (movieList.size() != 0)
+            return movieList;
+        else
+            throw new MovieListByGenreEmptyExceptions("Movies with genre: " + genre + " not found");
     }
 
     public void addMovie(MovieDto movieToSave){

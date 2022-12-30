@@ -1,7 +1,10 @@
 package pl.gajdek.alekino.domain.genere;
 
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.gajdek.alekino.domain.genere.GenreService;
 import pl.gajdek.alekino.domain.genere.dto.GenreDto;
@@ -26,7 +29,7 @@ public class GenreController {
     }
 
     @PostMapping("/genres/add-genre")
-    public void addGenre(GenreDto genre){
+    public void addGenre(@RequestBody @Valid GenreDto genre){
         genreService.addGenre(genre);
     }
 }
