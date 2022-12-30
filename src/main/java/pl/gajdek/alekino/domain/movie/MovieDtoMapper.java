@@ -13,8 +13,9 @@ public class MovieDtoMapper {
                 movie.getPga(),
                 movie.getDescription(),
                 movie.getShortDescription(),
-                movie.getReleaseYear(),
-                movie.getRunTime(),
+           //     movie.getReleaseYear(),
+                movie.getReleaseDate(),
+                movie.getRunTimeInMin(),
                 movie.getRating(),
                 movie.isPremiere()
         );

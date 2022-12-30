@@ -4,6 +4,9 @@ package pl.gajdek.alekino.domain.movie;
 import jakarta.persistence.*;
 import pl.gajdek.alekino.domain.genere.Genre;
 
+import java.sql.Date;
+
+
 @Entity
 public class Movie {
     @Id
@@ -17,8 +20,12 @@ public class Movie {
     private String pga;
     private String description;
     private String shortDescription;
-    private Integer releaseYear;
-    private Integer runTime;
+
+   // private int releaseYear;
+
+    private Date releaseDate;
+
+    private int runTimeInMin;
     private Double rating;
     private boolean premiere;
     
@@ -78,20 +85,28 @@ public class Movie {
         this.shortDescription = shortDescription;
     }
 
-    public Integer getReleaseYear() {
-        return releaseYear;
-    } //TODO czemu obiekt? nie wystarczy int? moze jakas data?
+//    public int getReleaseYear() {
+//        return releaseYear;
+//    } //TODO czemu obiekt? nie wystarczy int? moze jakas data?
 
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
+//    public void setReleaseYear(Integer releaseYear) {
+//        this.releaseYear = releaseYear;
+//    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public Integer getRunTime() {
-        return runTime;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public int getRunTimeInMin() {
+        return runTimeInMin;
     } //TODO czemu Integer? w minutach? sekundach?
 
-    public void setRunTime(Integer runTime) {
-        this.runTime = runTime;
+    public void setRunTimeInMin(Integer runTimeInMin) {
+        this.runTimeInMin = runTimeInMin;
     }
 
     public Double getRating() {

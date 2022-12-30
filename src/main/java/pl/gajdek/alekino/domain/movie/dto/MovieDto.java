@@ -1,23 +1,33 @@
 package pl.gajdek.alekino.domain.movie.dto;
 
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.sql.Date;
+
+
 public class MovieDto {
 
     private Long id;
+    @NotNull(message = "Movie title shouldn't be null")
+    @NotBlank(message = "Movie title shouldn't be blank")
     private String title;
     private String poster;
     private String genre;
     private String pga;
     private String description;
     private String shortDescription;
-    private Integer releaseYear;
-    private Integer runTime;
+
+ //   private Integer releaseYear;
+    private Date releaseDate;
+
+    private int runTimeInMin;
     private Double rating;
     private boolean premiere;
     public MovieDto(Long id, String title, String poster, String genre,
                     String pga, String description, String shortDescription,
-                    Integer releaseYear, Integer runTime, Double rating,
-                    boolean premiere) {
+                    Date releaseDate, int runTimeInMin, Double rating,boolean premiere) {
         this.id = id;
         this.title = title;
         this.poster = poster;
@@ -25,8 +35,9 @@ public class MovieDto {
         this.pga = pga;
         this.description = description;
         this.shortDescription = shortDescription;
-        this.releaseYear = releaseYear;
-        this.runTime = runTime;
+   //     this.releaseYear = releaseYear;
+        this.releaseDate = releaseDate;
+        this.runTimeInMin = runTimeInMin;
         this.rating = rating;
         this.premiere = premiere;
     }
@@ -87,20 +98,29 @@ public class MovieDto {
         this.shortDescription = shortDescription;
     }
 
-    public Integer getReleaseYear() {
-        return releaseYear;
+//    public Integer getReleaseYear() {
+//        return releaseYear;
+//    }
+//
+//    public void setReleaseYear(Integer releaseYear) {
+//        this.releaseYear = releaseYear;
+//    }
+
+
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    public Integer getRunTime() {
-        return runTime;
+    public int getRunTimeInMin() {
+        return runTimeInMin;
     }
 
-    public void setRunTime(Integer runTime) {
-        this.runTime = runTime;
+    public void setRunTime(int runTimeInMin) {
+        this.runTimeInMin = runTimeInMin;
     }
 
     public Double getRating() {

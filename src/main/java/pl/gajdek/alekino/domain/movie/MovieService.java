@@ -59,8 +59,8 @@ public class MovieService {
         movie.setPga(movieToSave.getPga());
         movie.setDescription(movieToSave.getDescription());
         movie.setShortDescription(movieToSave.getShortDescription());
-        movie.setReleaseYear(movieToSave.getReleaseYear());
-        movie.setRunTime(movieToSave.getRunTime());
+        movie.setReleaseDate(movieToSave.getReleaseDate());
+        movie.setRunTimeInMin(movieToSave.getRunTimeInMin());
         movie.setRating(movieToSave.getRating());
         movie.setPremiere(movieToSave.isPremiere());
         movieRepository.save(movie);
