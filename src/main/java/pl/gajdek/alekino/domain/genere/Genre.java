@@ -2,6 +2,7 @@ package pl.gajdek.alekino.domain.genere;
 
 
 import jakarta.persistence.*;
+import pl.gajdek.alekino.exceptions.NullOrEmptyStringExceptions;
 
 @Entity
 public class Genre {
@@ -24,10 +25,6 @@ public class Genre {
     }
 
     public void setName(String name) {
-        if (name == null || name.equals("")) {
-            throw new NullPointerException("The genre name can't be null");
-        }
-
         this.name = name;
     }
 
