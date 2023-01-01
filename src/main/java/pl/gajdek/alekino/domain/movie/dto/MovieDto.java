@@ -1,8 +1,15 @@
 package pl.gajdek.alekino.domain.movie.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.aspectj.bridge.IMessage;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.validator.constraints.URL;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
 
@@ -13,18 +20,22 @@ public class MovieDto {
     @NotNull(message = "Movie title shouldn't be null")
     @NotBlank(message = "Movie title shouldn't be blank")
     private String title;
+    @URL(message = "invalid URL")
     private String poster;
-  //  @NotFound
     private String genre;
+
+    @NotBlank(message = "PGA shouldn't be blank")
     private String pga;
+    @NotBlank(message = "description shouldn't be blank")
     private String description;
     private String shortDescription;
-
- //   private Integer releaseYear;
-
     private Date releaseDate;
 
+//    @Min(value = 1, message = "run time shouldn't be less than 1 min")
+//    @Max(value = 400, message = "run time shouldn't be grater than 400 min")
     private int runTimeInMin;
+    @Min(value = 0, message = "rating shouldn't be less than 0 score")
+    @Max(value = 10, message = "rating shouldn't be grater than 10 score")
     private Double rating;
     private boolean premiere;
     public MovieDto(Long id, String title, String poster, String genre,
@@ -37,7 +48,6 @@ public class MovieDto {
         this.pga = pga;
         this.description = description;
         this.shortDescription = shortDescription;
-   //     this.releaseYear = releaseYear;
         this.releaseDate = releaseDate;
         this.runTimeInMin = runTimeInMin;
         this.rating = rating;
@@ -100,15 +110,6 @@ public class MovieDto {
         this.shortDescription = shortDescription;
     }
 
-//    public Integer getReleaseYear() {
-//        return releaseYear;
-//    }
-//
-//    public void setReleaseYear(Integer releaseYear) {
-//        this.releaseYear = releaseYear;
-//    }
-
-
     public Date getReleaseDate() {
         return releaseDate;
     }
@@ -122,6 +123,14 @@ public class MovieDto {
     }
 
     public void setRunTime(int runTimeInMin) {
+        try {
+            if (runTimeInMin <= 0) {
+                throw new ArithmeticException("RunTime can not be less than 0");
+            }
+        }catch (ArithmeticException e){
+            System.out.println("czas trwania nie miejszy niż zero");
+        }
+
         this.runTimeInMin = runTimeInMin;
     }
 

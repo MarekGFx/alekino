@@ -5,7 +5,6 @@ import pl.gajdek.alekino.domain.genere.dto.GenreDto;
 import pl.gajdek.alekino.exceptions.UniqueDataConstraintException;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -32,8 +31,7 @@ public class GenreService {
     public void addGenre(GenreDto genre) throws UniqueDataConstraintException {
         Genre genreToSave = new Genre();
             genreToSave.setName(genre.getName());
-            if (findGenreByName(genre.getName()).isPresent() &&
-                    Objects.equals(genreToSave.getName(), findGenreByName(genre.getName()).get().getName())) {
+            if (findGenreByName(genre.getName()).isPresent()){
                 throw new UniqueDataConstraintException("genre: " + genre.getName() + " already exist");
             }
         genreToSave.setDescription(genre.getDescription());

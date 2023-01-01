@@ -2,7 +2,6 @@ package pl.gajdek.alekino.domain.genere;
 
 
 import jakarta.persistence.*;
-import pl.gajdek.alekino.exceptions.NullOrEmptyStringExceptions;
 
 @Entity
 public class Genre {
@@ -24,9 +23,7 @@ public class Genre {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name.toUpperCase();
-    }
+    public void setName(String name) { this.name = name.toUpperCase(); }
 
     public String getDescription() {
         return description;

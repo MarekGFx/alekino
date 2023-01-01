@@ -3,8 +3,6 @@ package pl.gajdek.alekino.domain.movie;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
-import pl.gajdek.alekino.exceptions.MovieListByGenreEmptyExceptions;
-import pl.gajdek.alekino.exceptions.MovieNotFoundException;
 
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/{id}")
-    public MovieDto getMovie(@PathVariable long id) throws MovieNotFoundException {
+    public MovieDto getMovie(@PathVariable long id) {
         return movieService.getMovie(id);
     }
 
@@ -33,7 +31,7 @@ public class MovieController {
     }
 
     @GetMapping("/movies/genre/{name}")
-    public List<MovieDto> getMoviesByGenre(String name) throws MovieListByGenreEmptyExceptions {
+    public List<MovieDto> getMoviesByGenre(String name) {
         return movieService.findMovieByGenreName(name);
     }
 

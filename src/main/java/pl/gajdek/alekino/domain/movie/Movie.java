@@ -2,6 +2,8 @@ package pl.gajdek.alekino.domain.movie;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 import pl.gajdek.alekino.domain.genere.Genre;
 
 import java.sql.Date;
@@ -20,11 +22,7 @@ public class Movie {
     private String pga;
     private String description;
     private String shortDescription;
-
-   // private int releaseYear;
-
     private Date releaseDate;
-
     private int runTimeInMin;
     private Double rating;
     private boolean premiere;
@@ -85,17 +83,9 @@ public class Movie {
         this.shortDescription = shortDescription;
     }
 
-//    public int getReleaseYear() {
-//        return releaseYear;
-//    } //TODO czemu obiekt? nie wystarczy int? moze jakas data?
-
-//    public void setReleaseYear(Integer releaseYear) {
-//        this.releaseYear = releaseYear;
-//    }
-
     public Date getReleaseDate() {
         return releaseDate;
-    }
+    }  //TODO czemu obiekt? nie wystarczy int? moze jakas data?
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
