@@ -14,12 +14,14 @@ public class MovieDto {
     @NotBlank(message = "Movie title shouldn't be blank")
     private String title;
     private String poster;
+  //  @NotFound
     private String genre;
     private String pga;
     private String description;
     private String shortDescription;
 
  //   private Integer releaseYear;
+
     private Date releaseDate;
 
     private int runTimeInMin;

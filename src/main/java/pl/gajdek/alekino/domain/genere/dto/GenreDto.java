@@ -3,8 +3,6 @@ package pl.gajdek.alekino.domain.genere.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Map;
-
 public class GenreDto {
     private Long id;
 
@@ -34,9 +32,7 @@ public class GenreDto {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getDescription() {
         return description;

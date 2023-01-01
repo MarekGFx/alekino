@@ -1,9 +1,7 @@
 package pl.gajdek.alekino.domain.movie;
 
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import pl.gajdek.alekino.domain.movie.Movie;
-import pl.gajdek.alekino.domain.movie.MovieService;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
 import pl.gajdek.alekino.exceptions.MovieListByGenreEmptyExceptions;
 import pl.gajdek.alekino.exceptions.MovieNotFoundException;
@@ -20,7 +18,6 @@ public class MovieController {
     }
 
     @GetMapping("/movies")
-//    @ResponseStatus(HttpStatus.OK)
     public List<MovieDto> getMovies(){
         return movieService.getMovies();
     }
@@ -41,7 +38,7 @@ public class MovieController {
     }
 
     @PostMapping("/movies/add-movie")
-    public void addMovie(MovieDto movie){
+    public void addMovie(@RequestBody @Valid MovieDto movie){
         movieService.addMovie(movie);
     }
 }

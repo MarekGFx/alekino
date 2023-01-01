@@ -1,5 +1,6 @@
 package pl.gajdek.alekino.domain.genere;
 
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.gajdek.alekino.domain.genere.GenreService;
 import pl.gajdek.alekino.domain.genere.dto.GenreDto;
 import pl.gajdek.alekino.domain.movie.MovieService;
+import pl.gajdek.alekino.exceptions.UniqueDataConstraintException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
@@ -29,7 +32,12 @@ public class GenreController {
     }
 
     @PostMapping("/genres/add-genre")
-    public void addGenre(@RequestBody @Valid GenreDto genre){
+    public void addGenre(@RequestBody @Valid GenreDto genre) throws UniqueDataConstraintException {
+
+//            if (genreService.findGenreByName(genre.getName()).equals(true)) {
+//                throw new SQLIntegrityConstraintViolationException("Name genre:" + genre + "already exist");
+//            }
+
         genreService.addGenre(genre);
     }
 }

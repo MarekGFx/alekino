@@ -25,7 +25,7 @@ public class Genre {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     public String getDescription() {
