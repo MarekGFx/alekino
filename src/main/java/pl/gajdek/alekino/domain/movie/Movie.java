@@ -1,19 +1,16 @@
 package pl.gajdek.alekino.domain.movie;
 
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import pl.gajdek.alekino.domain.genere.Genre;
-
-import java.sql.Date;
-
+import java.time.LocalDate;
 
 @Entity
 public class Movie {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
     private String poster;
     @ManyToOne
@@ -22,7 +19,7 @@ public class Movie {
     private String pga;
     private String description;
     private String shortDescription;
-    private Date releaseDate;
+    private LocalDate releaseDate;
     private int runTimeInMin;
     private Double rating;
     private boolean premiere;
@@ -39,9 +36,17 @@ public class Movie {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String title)  {
+            if (title == null || title.equals("")) {
+                throw new NullPointerException("Can't be null");
+            }
+            this.title = title;
     }
+
+//    public void setTitle(String title) {
+//        this.title = title;
+//    }
+
 
     public String getPoster() {
         return poster;
@@ -83,11 +88,16 @@ public class Movie {
         this.shortDescription = shortDescription;
     }
 
-    public Date getReleaseDate() {
+
+
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }  //TODO czemu obiekt? nie wystarczy int? moze jakas data?
 
-    public void setReleaseDate(Date releaseDate) {
+
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        System.out.println(releaseDate);
         this.releaseDate = releaseDate;
     }
 
@@ -95,9 +105,25 @@ public class Movie {
         return runTimeInMin;
     } //TODO czemu Integer? w minutach? sekundach?
 
-    public void setRunTimeInMin(Integer runTimeInMin) {
-        this.runTimeInMin = runTimeInMin;
+    public void setRunTimeInMin(int runTimeInMin) {
+        try {
+            if (runTimeInMin <= 1) {
+                throw new ArithmeticException("RunTime can not be less than 1 min");
+            }
+            if (runTimeInMin > 400){
+                throw new ArithmeticException("RunTime can not be grater than 400 min");
+            }
+            this.runTimeInMin = runTimeInMin;
+            System.out.println(runTimeInMin);
+        }catch (ArithmeticException e){
+            System.out.println("Błędny czas trwania filmu");
+        }
     }
+
+
+  //  public void setRunTimeInMin(Integer runTimeInMin) {
+//        this.runTimeInMin = runTimeInMin;
+//    }
 
     public Double getRating() {
         return rating;

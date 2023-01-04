@@ -45,6 +45,8 @@ public class MovieService {
             throw new NoSuchElementException("Movies with genre: " + genre + " not found");
     }
 
+
+
     public void addMovie(MovieDto movieToSave){
         Movie movie = new Movie();
         movie.setTitle(movieToSave.getTitle());
@@ -62,6 +64,4 @@ public class MovieService {
         movie.setPremiere(movieToSave.isPremiere());
         movieRepository.save(movie);
     }
-
-
 }

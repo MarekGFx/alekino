@@ -1,17 +1,13 @@
 package pl.gajdek.alekino.domain.movie.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.aspectj.bridge.IMessage;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.validator.constraints.URL;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+
+import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.URL;
+import pl.gajdek.alekino.exceptions.CustomDateConstraint;
+
+import java.time.LocalDate;
 
 
 public class MovieDto {
@@ -22,17 +18,29 @@ public class MovieDto {
     private String title;
     @URL(message = "invalid URL")
     private String poster;
+
+
+    @NotNull(message = "Genre shouldn't be null")
+    @NotBlank(message = "Genre shouldn't be blank")
     private String genre;
 
     @NotBlank(message = "PGA shouldn't be blank")
     private String pga;
     @NotBlank(message = "description shouldn't be blank")
     private String description;
+    @NotBlank(message = "Short description shouldn't be blank")
     private String shortDescription;
-    private Date releaseDate;
 
-//    @Min(value = 1, message = "run time shouldn't be less than 1 min")
-//    @Max(value = 400, message = "run time shouldn't be grater than 400 min")
+//    @Past(message = "date can't be current date")
+//    @NotNull(message = "Release date shouldn't be null")
+//    @JsonFormat(pattern="yyyy-MM-dd")
+
+    @CustomDateConstraint
+    private LocalDate releaseDate;
+
+    @Min(value = 1, message = "run time shouldn't be less than 1 min")
+    @Max(value = 400, message = "run time shouldn't be grater than 400 min")
+
     private int runTimeInMin;
     @Min(value = 0, message = "rating shouldn't be less than 0 score")
     @Max(value = 10, message = "rating shouldn't be grater than 10 score")
@@ -40,7 +48,7 @@ public class MovieDto {
     private boolean premiere;
     public MovieDto(Long id, String title, String poster, String genre,
                     String pga, String description, String shortDescription,
-                    Date releaseDate, int runTimeInMin, Double rating,boolean premiere) {
+                    LocalDate releaseDate, int runTimeInMin, Double rating,boolean premiere) {
         this.id = id;
         this.title = title;
         this.poster = poster;
@@ -110,11 +118,11 @@ public class MovieDto {
         this.shortDescription = shortDescription;
     }
 
-    public Date getReleaseDate() {
+    public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -122,15 +130,7 @@ public class MovieDto {
         return runTimeInMin;
     }
 
-    public void setRunTime(int runTimeInMin) {
-        try {
-            if (runTimeInMin <= 0) {
-                throw new ArithmeticException("RunTime can not be less than 0");
-            }
-        }catch (ArithmeticException e){
-            System.out.println("czas trwania nie miejszy niż zero");
-        }
-
+    public void setRunTimeInMin(int runTimeInMin) {
         this.runTimeInMin = runTimeInMin;
     }
 
