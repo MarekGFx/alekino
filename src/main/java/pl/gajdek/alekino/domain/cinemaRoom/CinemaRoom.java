@@ -1,36 +1,28 @@
 package pl.gajdek.alekino.domain.cinemaRoom;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-//@Entity
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class CinemaRoom {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Seat[][] seats;
-
-    public CinemaRoom(long id, Seat[][] seats) {
-        this.id = id;
-        this.seats = seats;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Seat[][] getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Seat[][] seats) {
-        seats = seats;
-    }
+    private int roomNumber;
+    private int maxNumberOfSeats;
+    @OneToMany(mappedBy = "cinemaRoom")
+    private List<Seat> seats;
 }

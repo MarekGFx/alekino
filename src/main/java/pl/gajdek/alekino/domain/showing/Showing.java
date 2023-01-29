@@ -1,25 +1,40 @@
 package pl.gajdek.alekino.domain.showing;
 
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
 import pl.gajdek.alekino.domain.movie.Movie;
+import pl.gajdek.alekino.domain.order.Orders;
+import pl.gajdek.alekino.domain.repertoire.Repertoire;
 
 import java.util.Date;
 
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Showing {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private Date date;
+    private double showHour;
+    @ManyToOne
     private Movie movie;
+    @ManyToOne
     private CinemaRoom cinemaRoom;
 
-    public Showing(long id, Date date, Movie movie, CinemaRoom cinemaRoom) {
-        this.id = id;
-        this.date = date;
-        this.movie = movie;
-        this.cinemaRoom = cinemaRoom;
-    }
+    @ManyToOne
+    @JoinColumn(name = "repertoire_id")
+    private Repertoire repertoire;
+
 
     public long getId() {
         return id;

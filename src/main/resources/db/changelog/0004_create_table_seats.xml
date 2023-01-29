@@ -12,7 +12,8 @@
             <column name="is_Busy" type="Boolean" />
             <column name="position_row" type="INT"/>
             <column name="position_col" type="INT"/>
-            <column name="seats_status" type="SMALLINT"/>
+            <column name="seat_number" type="INT"/>
+            <column name="seats_status" type="VARCHAR(100)"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

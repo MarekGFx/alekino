@@ -1,33 +1,60 @@
-package pl.gajdek.alekino.config.security;
+//package pl.gajdek.alekino.config.security;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+//import pl.gajdek.alekino.domain.user.Role;
+//
+//@Configuration
+//@EnableWebSecurity
+//
+//class CustomSecurityConfig  {
+//    private static final String USER_ROLE = "USER";
+//    private static final String ADMIN_ROLE = "ADMIN";
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.web.SecurityFilterChain;
+//
+//    private final JwtAuthenticationFilter jwtAuthFilter;
+//
+//    private final AuthenticationProvider authenticationProvider;
+//        @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//
+//        http
+//                .csrf()
+//                .disable()
+//                .authorizeHttpRequests()
+//                .requestMatchers("/api/v1/auth/**")
+//                .permitAll()
+//                .requestMatchers("/movies/add-movie").hasAnyRole(String.valueOf(Role.ADMIN))
+//                .requestMatchers(HttpMethod.GET)
+//                .authenticated()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .authenticationProvider(authenticationProvider)
+//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//
+//        return http.build();
+//    }
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
-@Configuration
-@EnableWebSecurity
-class CustomSecurityConfig  {
-    private static final String USER_ROLE = "USER";
-    private static final String ADMIN_ROLE = "ADMIN";
-
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-       http
-               .csrf().disable()
-               .authorizeHttpRequests()
-               .requestMatchers(HttpMethod.POST).hasAnyRole(ADMIN_ROLE)
-               .anyRequest().permitAll()
-               .and().httpBasic();
-        return http.build();
-    }
-
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+////       http
+////               .csrf().disable()
+////               .authorizeHttpRequests()
+////               .requestMatchers(HttpMethod.POST).hasAnyRole(String.valueOf(Role.ADMIN))
+////               .anyRequest().permitAll()
+////               .and().httpBasic();
+//        http.csrf().ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**"));
+//        http.headers().frameOptions().sameOrigin();
+//        return http.build();
+//    }
+//
 
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -52,4 +79,5 @@ class CustomSecurityConfig  {
 //                "/styles/**"
 //        );
 //    }
-}
+//}
+//

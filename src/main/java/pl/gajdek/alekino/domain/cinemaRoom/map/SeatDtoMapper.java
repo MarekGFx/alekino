@@ -1,5 +1,6 @@
-package pl.gajdek.alekino.domain.cinemaRoom;
+package pl.gajdek.alekino.domain.cinemaRoom.map;
 
+import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.SeatDto;
 
 public class SeatDtoMapper {
@@ -7,9 +8,9 @@ public class SeatDtoMapper {
     static SeatDto map(Seat seat){
         return new SeatDto(
                 seat.getId(),
-                seat.getBusy(),
-                seat.getPositionRow(),
-                seat.getPositionCol(),
+                seat.isBusy(),
+                seat.getRowNumber(),
+                seat.getSeatNumber(),
                 seat.getSeatsStatus()
         );
     }

@@ -1,9 +1,19 @@
 package pl.gajdek.alekino.domain.movie;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.gajdek.alekino.domain.genere.Genre;
+import pl.gajdek.alekino.domain.repertoire.Repertoire;
+
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Movie {
 
@@ -14,7 +24,6 @@ public class Movie {
     private String title;
     private String poster;
     @ManyToOne
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     private Genre genre;
     private String pga;
     private String description;
@@ -23,7 +32,7 @@ public class Movie {
     private int runTimeInMin;
     private Double rating;
     private boolean premiere;
-    
+
     public Long getId() {
         return id;
     }

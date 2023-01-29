@@ -48,7 +48,7 @@ public class MovieDto {
     private boolean premiere;
     public MovieDto(Long id, String title, String poster, String genre,
                     String pga, String description, String shortDescription,
-                    LocalDate releaseDate, int runTimeInMin, Double rating,boolean premiere) {
+                    LocalDate releaseDate, int runTimeInMin, Double rating, boolean premiere) {
         this.id = id;
         this.title = title;
         this.poster = poster;

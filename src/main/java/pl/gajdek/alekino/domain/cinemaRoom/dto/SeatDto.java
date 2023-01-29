@@ -1,21 +1,24 @@
 package pl.gajdek.alekino.domain.cinemaRoom.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.SeatStatus;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class SeatDto {
     private Long id;
     private Boolean isBusy;
-    private int positionRow;
-    private int positionCol;
-    private SeatStatus seatsStatus;
 
-    public SeatDto(Long id, Boolean isBusy, int positionRow, int positionCol, SeatStatus seatsStatus) {
-        this.id = id;
-        this.isBusy = isBusy;
-        this.positionRow = positionRow;
-        this.positionCol = positionCol;
-        this.seatsStatus = seatsStatus;
-    }
+    private int row;
+
+    private int seatNumber;
+    private SeatStatus seatsStatus;
 
     public Long getId() {
         return id;
@@ -31,22 +34,6 @@ public class SeatDto {
 
     public void setBusy(Boolean busy) {
         isBusy = busy;
-    }
-
-    public int getPositionRow() {
-        return positionRow;
-    }
-
-    public void setPositionRow(int positionRow) {
-        this.positionRow = positionRow;
-    }
-
-    public int getPositionCol() {
-        return positionCol;
-    }
-
-    public void setPositionCol(int positionCol) {
-        this.positionCol = positionCol;
     }
 
     public SeatStatus getSeatsStatus() {
