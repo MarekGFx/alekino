@@ -2,6 +2,7 @@ package pl.gajdek.alekino.domain.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 
 @Getter
 @Setter
@@ -21,5 +22,7 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToOne
+    private ShoppingCart shoppingCart;
 
 }

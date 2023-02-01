@@ -14,7 +14,7 @@ import lombok.Setter;
 @Entity
 public class Seat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean isBusy;
     private int rowNumber;
@@ -24,4 +24,12 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "cinema_room_id")
     private CinemaRoom cinemaRoom;
+
+    public boolean isBusy() {
+        return isBusy;
+    }
+
+    public void setBusy(boolean busy) {
+        isBusy = busy;
+    }
 }
