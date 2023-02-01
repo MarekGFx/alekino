@@ -18,6 +18,7 @@ import java.util.List;
 public class CinemaRoomController {
 
     private CinemaRoomService cinemaRoomService;
+    private SeatService seatService;
 
     @GetMapping()
     public ResponseEntity<?> getCinemaRoom(){
@@ -28,6 +29,12 @@ public class CinemaRoomController {
     public ResponseEntity<?> getCinemaRoom(@PathVariable("id") long id){
         return cinemaRoomService.getCinemaRoom(id);
     }
+
+    @GetMapping("/{id}/seats")
+    public ResponseEntity<?> getCinemaRoomSeatsList(@PathVariable("id") long id) {
+        return seatService.getSeatsByCinemaRoom(id);
+    }
+
 
     @Transactional
     @PatchMapping()

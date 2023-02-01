@@ -12,35 +12,33 @@ import pl.gajdek.alekino.domain.cinemaRoom.SeatStatus;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeatDto {
-    private Long id;
+
     private Boolean isBusy;
-
     private int row;
-
     private int seatNumber;
     private SeatStatus seatsStatus;
 
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Boolean getBusy() {
-        return isBusy;
-    }
-
-    public void setBusy(Boolean busy) {
-        isBusy = busy;
-    }
-
-    public SeatStatus getSeatsStatus() {
-        return seatsStatus;
-    }
-
-    public void setSeatsStatus(SeatStatus seatsStatus) {
-        this.seatsStatus = seatsStatus;
-    }
+//    public Boolean getBusy() {
+//        return isBusy;
+//    }
+//
+//    public void setBusy(Boolean busy) {
+//        isBusy = busy;
+//    }
+//
+//    public SeatStatus getSeatsStatus() {
+//        return seatsStatus;
+//    }
+//
+//    public void setSeatsStatus(SeatStatus seatsStatus) {
+//        this.seatsStatus = seatsStatus;
+//    }
 }

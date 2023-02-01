@@ -40,6 +40,10 @@ public class CinemaRoomService {
         else if (newCinemaRoomDto != null) {
             CinemaRoom cinemaRoom = new CinemaRoom();
             cinemaRoom.setRoomNumber(newCinemaRoomDto.getRoomNumber());
+            if (cinemaRoomRepository.findByRoomNumber(cinemaRoom.getRoomNumber()).isPresent()){
+                return ResponseEntity.status(400).body("Cinema room with number " + cinemaRoom.getRoomNumber()
+                + " already exist");
+            }
             cinemaRoom.setMaxNumberOfSeats(newCinemaRoomDto.getMaxNumberOfSeats());
             cinemaRoomRepository.save(cinemaRoom);
             return ResponseEntity.status(201).body("New Cinema room has ben added");
