@@ -1,10 +1,11 @@
 package pl.gajdek.alekino.domain.movie;
 
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
+import pl.gajdek.alekino.domain.movie.dto.MovieToTicketInfoDto;
 
 public class MovieDtoMapper {
 
-    static MovieDto map(Movie movie) {
+    static MovieDto mapToMovieDto(Movie movie) {
         return new MovieDto(
                 movie.getId(),
                 movie.getTitle(),
@@ -17,6 +18,13 @@ public class MovieDtoMapper {
                 movie.getRunTimeInMin(),
                 movie.getRating(),
                 movie.isPremiere()
+        );
+    }
+
+    static MovieToTicketInfoDto mapToMovieTicketInfoDto(Movie movie) {
+        return new MovieToTicketInfoDto(
+                movie.getTitle(),
+                movie.getGenre().getName()
         );
     }
 }

@@ -18,18 +18,9 @@ public class SeatController {
 
     private SeatService seatService;
 
-
-    @Transactional
-    @PatchMapping("/{id}/cinema-room")
-    @Operation(summary = "Add seat to cinema room")
-    public ResponseEntity<?> addSeatToCinemaRoom(@PathVariable("id") long id,
-                                                 @RequestBody @Valid AddSeatToCinemaRoomDto seatDto){
-        return seatService.addSeatToCinemaRoom(id,seatDto);
-    }
-
     @Transactional
     @PatchMapping("/{seatId}/showing/{showingId}/users/{userId}")
-    @Operation(summary = "Add seat to cinema room")
+    @Operation(summary = "Reserve showing seat")
     public ResponseEntity<?> reserveSeat(@PathVariable("seatId") long seatId, @PathVariable("showingId") long showingId,
                                          @PathVariable("userId") long userId){
         return seatService.reserveSeat(seatId,showingId,userId);

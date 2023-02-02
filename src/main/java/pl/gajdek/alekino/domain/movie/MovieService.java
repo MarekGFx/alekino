@@ -21,23 +21,23 @@ public class MovieService {
     }
 
     public List<MovieDto> getMovies() {
-        return movieRepository.findAll().stream().map(MovieDtoMapper::map).toList();
+        return movieRepository.findAll().stream().map(MovieDtoMapper::mapToMovieDto).toList();
     }
 
     public MovieDto getMovie(long id) throws NoSuchElementException {
-        return movieRepository.findById(id).map(MovieDtoMapper::map)
+        return movieRepository.findById(id).map(MovieDtoMapper::mapToMovieDto)
                 .orElseThrow(() -> new NoSuchElementException("movie not found with id: " + id));
     }
 
     public List<MovieDto> findAllPremiere() {
         return movieRepository.findAllByPremiereIsTrue().stream()
-                .map(MovieDtoMapper::map)
+                .map(MovieDtoMapper::mapToMovieDto)
                 .toList();
     }
 
     public List<MovieDto> findMovieByGenreName(String genre) throws NoSuchElementException {
         List<MovieDto> movieList = movieRepository.findAllByGenre_NameIgnoreCase(genre).stream()
-                .map(MovieDtoMapper::map)
+                .map(MovieDtoMapper::mapToMovieDto)
                 .toList();
         if (movieList.size() != 0)
             return movieList;

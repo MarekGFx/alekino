@@ -48,7 +48,7 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(DateTimeParseException.class)
     public Map<String, String> handleBusinessException(DateTimeParseException ex){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage", "Release date: " + ex.getParsedString()
+        errorMap.put("errorMessage", "date: " + ex.getParsedString()
                 + " is incorrect, give the date according to the pattern yyyy-MM-dd");
         return errorMap;
     }

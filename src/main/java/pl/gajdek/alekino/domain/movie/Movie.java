@@ -1,6 +1,8 @@
 package pl.gajdek.alekino.domain.movie;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +23,18 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Size(max = 255)
     private String title;
     private String poster;
     @ManyToOne
     private Genre genre;
     private String pga;
+    @NotBlank
+    @Size(max = 10000)
     private String description;
+    @NotBlank
+    @Size(max = 300)
     private String shortDescription;
     private LocalDate releaseDate;
     private int runTimeInMin;

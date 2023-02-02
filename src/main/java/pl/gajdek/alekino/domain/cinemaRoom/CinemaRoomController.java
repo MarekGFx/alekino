@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
+import pl.gajdek.alekino.domain.cinemaRoom.dto.AddSeatToCinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.NewCinemaRoomDto;
 
 import java.util.List;
@@ -35,7 +36,6 @@ public class CinemaRoomController {
         return seatService.getSeatsByCinemaRoom(id);
     }
 
-
     @Transactional
     @PatchMapping()
     @Operation(summary = "Add new cinema room")
@@ -43,5 +43,11 @@ public class CinemaRoomController {
         return cinemaRoomService.addNewCinemaRoom(newCinemaRoomDto);
     }
 
-
+    @Transactional
+    @PatchMapping("/{id}/seats")
+    @Operation(summary = "Add seat to cinema room")
+    public ResponseEntity<?> addSeatToCinemaRoom(@PathVariable("id") long id,
+                                                 @RequestBody @Valid AddSeatToCinemaRoomDto seatDto){
+        return seatService.addSeatToCinemaRoom(id,seatDto);
+    }
 }

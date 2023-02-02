@@ -94,7 +94,7 @@ public class SeatService {
             } else {
 
                 Ticket ticket = new Ticket();
-                Optional<ShoppingCart> shoppingCart = null;
+                Optional<ShoppingCart> shoppingCart = Optional.empty(); //TODO check this is null in that way
                 if (user.get().getShoppingCart() != null){
                     shoppingCart = shoppingCartRepository.findById(user.get().getShoppingCart().getId());
                 }
@@ -105,7 +105,7 @@ public class SeatService {
                 ticketRepository.save(ticket);
                 seat.get().setBusy(true);
 
-                if (shoppingCart.isPresent()) {
+                if (shoppingCart.isPresent()) {  //TODO check this is null in that way
                     shoppingCart.get().getTicket().add(ticket);
                     ticket.setShoppingCart(shoppingCart.get());
                     shoppingCartRepository.save(shoppingCart.get());
