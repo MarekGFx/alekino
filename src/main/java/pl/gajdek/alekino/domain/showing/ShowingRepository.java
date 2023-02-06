@@ -12,5 +12,7 @@ public interface ShowingRepository extends JpaRepository<Showing, Long> {
 
     List<Showing> findByMovieId(long id);
 
-
+    List<Showing> findByCinemaRoomId(long id);
+    @Override
+    Optional<Showing> findById(Long aLong);
 }

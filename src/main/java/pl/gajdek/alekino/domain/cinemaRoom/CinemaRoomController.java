@@ -4,14 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.AddSeatToCinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.NewCinemaRoomDto;
-
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -49,5 +45,12 @@ public class CinemaRoomController {
     public ResponseEntity<?> addSeatToCinemaRoom(@PathVariable("id") long id,
                                                  @RequestBody @Valid AddSeatToCinemaRoomDto seatDto){
         return seatService.addSeatToCinemaRoom(id,seatDto);
+    }
+
+    @Transactional
+    @PatchMapping("/{cinemaRoomId}/first-seat/{firstSeatId}/second-seat/{secondSeatId}")
+    @Operation(summary = "Merge two seats into VIP couch")
+    public ResponseEntity<?> mergeSeatsToVipDoubleCouch(long cinemaRoomId, long firstSeatId, long secondSeatId){
+        return seatService.setSeatStatus(cinemaRoomId,firstSeatId,secondSeatId);
     }
 }

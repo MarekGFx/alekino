@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.gajdek.alekino.ConstantCinemaData.ConstantDataForCinema;
-import pl.gajdek.alekino.domain.cinemaRoom.Seat;
-import pl.gajdek.alekino.domain.cinemaRoom.SeatStatus;
+import pl.gajdek.alekino.constantCinemaData.ConstantDataForCinema;
 import pl.gajdek.alekino.domain.order.Orders;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 import pl.gajdek.alekino.domain.showing.Showing;
+import pl.gajdek.alekino.enums.SeatStatus;
+import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
 
 
 @Getter
@@ -32,7 +32,7 @@ public class Ticket {
     private Orders orders;
 
     @OneToOne
-    private Seat seat;
+    private ShowingSeat showingSeat;
 
     @ManyToOne
     @JoinColumn(name = "shopping_cart_id")

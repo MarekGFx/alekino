@@ -20,4 +20,5 @@ public class CinemaRoomDto {
     private int roomNumber;
     private int maxNumberOfSeats;
     private int numberOfSeats;
+    private List<SeatDto> seatList;
 }

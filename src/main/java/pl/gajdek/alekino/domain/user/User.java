@@ -3,6 +3,7 @@ package pl.gajdek.alekino.domain.user;
 import jakarta.persistence.*;
 import lombok.*;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
+import pl.gajdek.alekino.enums.Role;
 
 @Getter
 @Setter

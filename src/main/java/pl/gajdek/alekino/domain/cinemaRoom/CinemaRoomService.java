@@ -1,11 +1,9 @@
 package pl.gajdek.alekino.domain.cinemaRoom;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PatchMapping;
-import pl.gajdek.alekino.ConstantCinemaData.ConstantDataForCinema;
+import pl.gajdek.alekino.constantCinemaData.ConstantDataForCinema;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.CinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.NewCinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.map.CinemaRoomMapper;

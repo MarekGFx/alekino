@@ -8,7 +8,7 @@ public class SeatDtoMapper {
 
    public static SeatDto mapToSeatDto(Seat seat){
         return new SeatDto(
-                seat.isBusy(),
+                seat.getId(),
                 seat.getRowNumber(),
                 seat.getSeatNumber(),
                 seat.getSeatsStatus()

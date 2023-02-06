@@ -7,7 +7,7 @@
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-//import pl.gajdek.alekino.domain.user.Role;
+//import pl.gajdek.alekino.enums.Role;
 //
 //@Configuration
 //@EnableWebSecurity
