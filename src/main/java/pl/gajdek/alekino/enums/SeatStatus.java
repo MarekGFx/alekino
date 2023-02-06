@@ -1,4 +1,4 @@
-package pl.gajdek.alekino.domain.cinemaRoom;
+package pl.gajdek.alekino.enums;
 
 public enum SeatStatus {
 

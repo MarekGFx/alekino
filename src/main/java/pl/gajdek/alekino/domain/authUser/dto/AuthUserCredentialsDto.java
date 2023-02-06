@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import pl.gajdek.alekino.domain.user.Role;
+import pl.gajdek.alekino.enums.Role;
 
 
 @Getter

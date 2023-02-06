@@ -1,7 +1,7 @@
 package pl.gajdek.alekino.domain.authUser;
 
 import pl.gajdek.alekino.domain.authUser.dto.AuthUserCredentialsDto;
-import pl.gajdek.alekino.domain.user.Role;
+import pl.gajdek.alekino.enums.Role;
 
 public class AuthUserCredentialsDtoMapper {
 

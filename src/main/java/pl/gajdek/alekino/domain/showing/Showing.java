@@ -2,16 +2,23 @@ package pl.gajdek.alekino.domain.showing;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
+import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.movie.Movie;
 import pl.gajdek.alekino.domain.order.Orders;
 import pl.gajdek.alekino.domain.repertoire.Repertoire;
+import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
+import pl.gajdek.alekino.exceptions.DateTimeInPastException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -22,10 +29,13 @@ import java.util.Date;
 public class Showing {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private Date date;
-    private double showHour;
+    @NotNull
+    @Column(nullable = false)
+    private LocalDateTime startTime;
+    private int showHour;
+    private int showMin;
     @ManyToOne
     private Movie movie;
     @ManyToOne
@@ -34,6 +44,10 @@ public class Showing {
     @ManyToOne
     @JoinColumn(name = "repertoire_id")
     private Repertoire repertoire;
+
+    @OneToMany(mappedBy = "showing")
+    private List<ShowingSeat> seats;
+
 
 
     public long getId() {
@@ -44,12 +58,31 @@ public class Showing {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartTime(LocalDateTime startTime)  {
+        if (startTime.compareTo(LocalDateTime.now()) <= 0){
+            throw new DateTimeInPastException("Showing start time cant be in de past");
+        }
+        this.startTime = startTime;
+    }
+
+    public int getShowHour() {
+        return startTime.getHour();
+    }
+
+    public void setShowHour() {
+        this.showHour = startTime.getHour();
+    }
+
+    public int getShowMin() {
+        return startTime.getMinute();
+    }
+
+    public void setShowMin() {
+        this.showMin = startTime.getMinute();
     }
 
     public Movie getMovie() {
@@ -67,4 +100,5 @@ public class Showing {
     public void setCinemaRoom(CinemaRoom cinemaRoom) {
         this.cinemaRoom = cinemaRoom;
     }
+
 }

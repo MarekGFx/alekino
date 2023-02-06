@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import pl.gajdek.alekino.exceptions.DateTimeInPastException;
 import pl.gajdek.alekino.exceptions.UniqueDataConstraintException;
 
 import java.time.format.DateTimeParseException;
@@ -48,8 +49,16 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(DateTimeParseException.class)
     public Map<String, String> handleBusinessException(DateTimeParseException ex){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage", "Release date: " + ex.getParsedString()
+        errorMap.put("errorMessage", "date: " + ex.getParsedString()
                 + " is incorrect, give the date according to the pattern yyyy-MM-dd");
+        return errorMap;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DateTimeInPastException.class)
+    public Map<String, String> handleBusinessException(DateTimeInPastException ex){
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
         return errorMap;
     }
 

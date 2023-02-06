@@ -22,12 +22,11 @@ public class Repertoire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToMany(mappedBy = "repertoire")
     private List<Showing> showing;
-
     @OneToMany
     private List<Movie> movieInfoToRepertoire;
+    @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
 }
