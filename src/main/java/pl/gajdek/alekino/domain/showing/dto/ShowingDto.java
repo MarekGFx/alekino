@@ -24,7 +24,6 @@ public class ShowingDto {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime startTime;
- //   private double hour;
     private String hour;
     private String movieTitle;
     private String movieGenre;

@@ -1,6 +1,8 @@
 package pl.gajdek.alekino.domain.showing;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.gajdek.alekino.constantCinemaData.ConstantDataForCinema;
@@ -21,7 +23,6 @@ import pl.gajdek.alekino.domain.showingSeat.map.ShowingSeatDtoMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,19 +31,19 @@ public class ShowingServices {
     private ShowingRepository showingRepository;
     private CinemaRoomRepository cinemaRoomRepository;
     private MovieRepository movieRepository;
-
     private ShowingSeatRepository showingSeatRepository;
+    private ShowingMapperDto showingMapperDto;
 
     public ResponseEntity<?> getListAllShowings() {
         List<ShowingToListDto> showingDtoList = showingRepository.findAll()
                 .stream()
-                .map(ShowingMapperDto::mapToShowingListDto)
+                .map(showingMapperDto::mapToShowingListDto)
                 .toList();
         return ResponseEntity.ok(showingDtoList);
     }
 
     public ResponseEntity<?> getShowing(long id) {
-        Optional<ShowingDto> showingDto = showingRepository.findById(id).map(ShowingMapperDto::mapToShowingDto);
+        Optional<ShowingDto> showingDto = showingRepository.findById(id).map(showingMapperDto::toDto);
         if (showingDto.isPresent()){
             List<ShowingSeatDto> seatDtoList = showingDto.get().getSeatDtoList();
             if (seatDtoList.isEmpty() ) {
@@ -63,7 +64,7 @@ public class ShowingServices {
     public ResponseEntity<?> getListShowingsByMovie(long id) {
         List<ShowingToListDto> showingDtoList = showingRepository.findByMovieId(id)
                 .stream()
-                .map(ShowingMapperDto::mapToShowingListDto)
+                .map(showingMapperDto::mapToShowingListDto)
                 .toList();
         return ResponseEntity.ok(showingDtoList);
     }
@@ -73,6 +74,7 @@ public class ShowingServices {
             Showing showing = new Showing();
             showing.setStartTime(showToAdd.getStartTime());
             showing.setShowHour();
+            showing.setShowMin();
             Optional<Movie> movie = movieRepository.findById(showToAdd.getMovieId());
             if (movie.isPresent()) {
                 showing.setMovie(movie.get());
