@@ -1,10 +1,10 @@
 package pl.gajdek.alekino.domain.authUser;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface AuthUserRepository extends CrudRepository<AuthUsers, Long> {
+@Repository
+public interface AuthUserRepository extends JpaRepository<AuthUsers, Long> {
 
 //    Optional<AuthUsers> findByEmail(String email);
 }

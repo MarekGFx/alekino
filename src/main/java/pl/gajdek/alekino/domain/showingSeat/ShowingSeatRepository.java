@@ -7,7 +7,4 @@ import java.util.Optional;
 
 @Repository
 public interface ShowingSeatRepository extends JpaRepository<ShowingSeat,Long> {
-
-
-//    Optional<showingSeat> findByRowNumberAndSeatNumber(int rowNumber, int seatNumber);
 }
