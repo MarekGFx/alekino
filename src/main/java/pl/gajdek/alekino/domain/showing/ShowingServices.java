@@ -33,6 +33,7 @@ public class ShowingServices {
     private MovieRepository movieRepository;
     private ShowingSeatRepository showingSeatRepository;
     private ShowingMapperDto showingMapperDto;
+    private ShowingSeatDtoMapper showingSeatDtoMapper;
 
     public ResponseEntity<?> getListAllShowings() {
         List<ShowingToListDto> showingDtoList = showingRepository.findAll()
@@ -50,7 +51,7 @@ public class ShowingServices {
                 Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findByRoomNumber(showingDto.get().getCinemaRoomNumber());
                 if (cinemaRoom.isPresent()){
                     List<Seat> seatList = cinemaRoom.get().getSeats();
-                    seatDtoList = seatList.stream().map(ShowingSeatDtoMapper::mapToShowingSeatDto).toList();
+                    seatDtoList = seatList.stream().map(showingSeatDtoMapper::mapToShowingSeatDto).toList();
                     showingDto.get().setSeatDtoList(seatDtoList);
                     return ResponseEntity.ok(showingDto);
                 } else
@@ -130,7 +131,7 @@ public class ShowingServices {
         List<ShowingSeat> showingSeatList = new ArrayList<>();
         for (Seat seat : seatList) {
             ShowingSeat showingSeat;
-            showingSeat = ShowingSeatDtoMapper.mapFromShowingSeatDto(seat, showing);
+            showingSeat = showingSeatDtoMapper.mapFromShowingSeatDto(seat, showing);
             showingSeatList.add(showingSeat);
             showingSeatRepository.save(showingSeat);
         }
