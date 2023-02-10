@@ -30,7 +30,6 @@ public class CinemaRoomService {
             return ResponseEntity.status(404).body("Cinema room with this ID do not exist");
     }
 
-
     public ResponseEntity<?> addNewCinemaRoom(NewCinemaRoomDto newCinemaRoomDto){
         if (cinemaRoomRepository.findAll().size() >= ConstantDataForCinema.MAX_CINEMA_SIZE){
             return ResponseEntity.status(400).body("You cant add more rooms, try edit existing ones");
@@ -49,4 +48,6 @@ public class CinemaRoomService {
         else
             return ResponseEntity.status(400).body("Cant add new room");
     }
+
+
 }

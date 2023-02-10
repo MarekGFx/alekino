@@ -23,6 +23,7 @@ public class Repertoire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate repertoireDate;
+
     @OneToMany(mappedBy = "repertoire")
     private List<Showing> showing;
     @Enumerated(EnumType.STRING)

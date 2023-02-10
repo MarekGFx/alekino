@@ -12,6 +12,8 @@ import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCartRepository;
 import pl.gajdek.alekino.domain.showing.Showing;
 import pl.gajdek.alekino.domain.showing.ShowingRepository;
+import pl.gajdek.alekino.domain.showingSeat.dto.ShowingSeatDto;
+import pl.gajdek.alekino.domain.showingSeat.map.ShowingSeatDtoMapper;
 import pl.gajdek.alekino.domain.ticket.Ticket;
 import pl.gajdek.alekino.domain.ticket.TicketRepository;
 import pl.gajdek.alekino.domain.user.User;
@@ -31,21 +33,27 @@ public class ShowingSeatService {
     private UserRepository userRepository;
     private ShoppingCartRepository shoppingCartRepository;
     private TicketRepository ticketRepository;
+    private ShowingSeatDtoMapper showingSeatDtoMapper;
 
-//    public ResponseEntity<?> getSeatsByShowing(long id){
-//        Optional<Showing> showing = showingRepository.findById(id);
-//        if (showing.isPresent()){
-//            List<SeatDto> seatDtoList = showing
-//                    .getSeats()
-//                    .stream()
-//                    .map(SeatDtoMapper::mapToSeatDto)
-//                    .toList();
-//            return ResponseEntity.ok(seatDtoList);
-//        }
-//        else
-//            return ResponseEntity.status(404).body("Cinema room with ID " + id + " does not exist");
-//    }
-//
+    public ResponseEntity<?> getSeatsByShowing(long id){
+        Optional<Showing> showing = showingRepository.findById(id);
+        if (showing.isPresent()){
+            List<ShowingSeatDto> seatDtoList = showing.get()
+                    .getSeats()
+                    .stream()
+                    .map(showingSeatDtoMapper::mapToShowingSeatDto)
+                    .toList();
+            return ResponseEntity.ok(seatDtoList);
+        }
+        else
+            return ResponseEntity.status(404).body("Showing with ID " + id + " does not exist");
+    }
+
+    public ResponseEntity<?> reserveShowingSeat(long showingId){
+        Optional<ShowingSeat> seat = showingSeatRepository.findById(showingId);
+        return null;
+    }
+
 //    public ResponseEntity<?> reserveSeat(long seatId, long showingId, long userID){
 //        Optional<Seat> seat = seatRepository.findById(seatId);
 //        Optional<Showing> showing = showingRepository.findById(showingId);
@@ -79,7 +87,6 @@ public class ShowingSeatService {
 //                    user.get().setShoppingCart(newShoppingCart);
 //                    ticket.setShoppingCart(newShoppingCart);
 //                    shoppingCartRepository.save(newShoppingCart);
-//
 //                }
 //                return ResponseEntity.status(200).body("Added ticket to shoppingCart");
 //            }

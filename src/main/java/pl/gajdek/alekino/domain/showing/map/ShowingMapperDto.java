@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class ShowingMapperDto implements EntityMapper<Showing,ShowingDto> {
 
     private ShowingRepository showingRepository;
+    private ShowingSeatDtoMapper showingSeatDtoMapper;
 
 
 
@@ -47,7 +48,7 @@ public class ShowingMapperDto implements EntityMapper<Showing,ShowingDto> {
                 showing.getMovie().getTitle(),
                 showing.getMovie().getGenre().getName(),
                 showing.getCinemaRoom().getRoomNumber(),
-                showing.getSeats().stream().map(ShowingSeatDtoMapper::mapToShowingSeatDto).toList()
+                showing.getSeats().stream().map(showingSeatDtoMapper::mapToShowingSeatDto).toList()
         );
     }
 

@@ -86,6 +86,12 @@ public class SeatService {
         Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findById(cinemaRoomId);
         Optional<Seat> firstSeat = seatRepository.findById(firstSeatId);
         Optional<Seat> secondSeat = seatRepository.findById(secondSeatId);
+        List<Showing> showings = showingRepository.findByCinemaRoomId(cinemaRoomId);
+
+        if (!showings.isEmpty()){
+            return ResponseEntity.status(400).body("In this cinema hall are already scheduled screenings, " +
+                    "you can not now modify the arrangement of chairs in the hall");
+        }
 
         if (!cinemaRoom.isPresent()) {
             return ResponseEntity.status(404).body("Cinema room with id " + cinemaRoomId + " does not exist");
@@ -112,7 +118,6 @@ public class SeatService {
                 resetSeatsNumber(secondSeatId, cinemaRoomId);
                 return ResponseEntity.ok("Seats was merged");
             }
-
         } else
             return ResponseEntity.badRequest().body("Given seats should be side by side");
     }
