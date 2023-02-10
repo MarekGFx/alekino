@@ -12,13 +12,15 @@ import pl.gajdek.alekino.domain.showing.Showing;
 import pl.gajdek.alekino.enums.SeatStatus;
 import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
 
+import java.io.Serializable;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Ticket {
+public class Ticket implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
