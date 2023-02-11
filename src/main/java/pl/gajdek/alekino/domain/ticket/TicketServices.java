@@ -17,11 +17,11 @@ public class TicketServices {
     public void addTicket(Ticket ticket) {
         Long shoppingCartId = (Long) session.getAttribute("shopping_cart_id");
         if (shoppingCartId == null) {
-            // Jeśli niezalogowany użytkownik nie ma jeszcze koszyka zakupów, utwórz nowy
+
             shoppingCartId = shoppingCartService.createNewShoppingCart();
             session.setAttribute("shopping_cart_id", shoppingCartId);
         }
-        // Przypisz bilet do koszyka zakupów
+
         shoppingCartService.addTicketToShoppingCart(shoppingCartId, ticket);
     }
 

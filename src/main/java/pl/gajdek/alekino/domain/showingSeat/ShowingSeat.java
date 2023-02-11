@@ -9,6 +9,8 @@ import lombok.Setter;
 import pl.gajdek.alekino.domain.showing.Showing;
 import pl.gajdek.alekino.enums.SeatStatus;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,6 +28,14 @@ public class ShowingSeat {
     @ManyToOne
     @JoinColumn(name = "showing_id")
     private Showing showing;
+
+    public ShowingSeat(boolean isBusy, int rowNumber, int seatNumber, SeatStatus seatsStatus, Showing showing) {
+        this.isBusy = isBusy;
+        this.rowNumber = rowNumber;
+        this.seatNumber = seatNumber;
+        this.seatsStatus = seatsStatus;
+        this.showing = showing;
+    }
 
     public boolean isBusy() {
         return isBusy;

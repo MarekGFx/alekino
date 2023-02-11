@@ -72,7 +72,6 @@ public class ShowingSeatService {
             showingSeatRepository.save(seat.get());
             ticketServices.addTicket(ticket);
             ticketRepository.save(ticket);
-
             return ResponseEntity.status(200).body("Ticket added to shopping cart");
         }
     }

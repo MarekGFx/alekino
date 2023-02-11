@@ -56,7 +56,7 @@ insert into seat( row_number, seat_number, seats_status, cinema_room_id) values 
 
 insert into users(email, first_name, last_name, role, shopping_cart_id) values ('email@wp.pl', 'testuser1', 'testuser1', 'USER', null)
 
-insert into repertoire(day_of_week, repertoire_date) values ('FRIDAY', '2023-02-10')
+--insert into repertoire(day_of_week, repertoire_date) values ('FRIDAY', '2023-02-10')
 
 --insert into showing(date, show_hour,cinema_room_id,movie_id,repertoire_id) values ('2023-02-16', 12.30, 1, 2, 1)
 --insert into showing(date, show_hour,cinema_room_id,movie_id,repertoire_id) values ('2023-02-16', 12.30, 1, 2, 1)

@@ -115,7 +115,7 @@ public class ShowingServices {
                         }
                     }
                 }
-                return generateShow(showing, cinemaRoom);
+                return generateShow(showing, cinemaRoom.get());
 
             } else
                 return ResponseEntity.status(404).body("Cinema room with Id " + showToAdd.getCinemaRoomId() + " does not exist");
@@ -123,19 +123,21 @@ public class ShowingServices {
         return ResponseEntity.status(404).body("Can not create show");
     }
 
-    private ResponseEntity<String> generateShow(Showing showing, Optional<CinemaRoom> cinemaRoom) {
-        showing.setCinemaRoom(cinemaRoom.get());
+    private ResponseEntity<String> generateShow(Showing showing, CinemaRoom cinemaRoom) {
+        showing.setCinemaRoom(cinemaRoom);
         showingRepository.save(showing);
 
-        List<Seat> seatList = cinemaRoom.get().getSeats();
+        List<Seat> seatList = cinemaRoom.getSeats();
         List<ShowingSeat> showingSeatList = new ArrayList<>();
+
         for (Seat seat : seatList) {
-            ShowingSeat showingSeat;
-            showingSeat = showingSeatDtoMapper.mapFromShowingSeatDto(seat, showing);
-            showingSeatList.add(showingSeat);
+            ShowingSeat showingSeat = showingSeatDtoMapper.mapFromSeatToShowingSeat(seat, showing);
             showingSeatRepository.save(showingSeat);
+            showingSeatList.add(showingSeat);
         }
+
         showing.setSeats(showingSeatList);
+        showingRepository.save(showing);
         return ResponseEntity.status(201).body("Show successful created");
     }
 

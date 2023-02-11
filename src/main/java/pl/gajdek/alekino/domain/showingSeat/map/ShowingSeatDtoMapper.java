@@ -30,9 +30,8 @@ public class ShowingSeatDtoMapper {
         );
     }
 
-    public ShowingSeat mapFromShowingSeatDto(Seat seat, Showing showing){
+    public ShowingSeat mapFromSeatToShowingSeat(Seat seat, Showing showing){
         return new ShowingSeat(
-                seat.getId(),
                 false,
                 seat.getRowNumber(),
                 seat.getSeatNumber(),

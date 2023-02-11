@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ShoppingCart  implements Serializable {
+public class ShoppingCart implements Serializable {
 
 
     @Id

@@ -22,8 +22,7 @@ import java.util.stream.Collectors;
 public class RepertoireMapperDto implements EntityMapper<Repertoire, RepertoireToMainPageDto>  {
 
     public RepertoireToShownDto mapRepertoireToDto(Repertoire repertoire) {
-        RepertoireToShownDto repertoireToShownDto = new RepertoireToShownDto();
-//        for (Repertoire repertoire : repertoireList) {
+//        RepertoireToShownDto repertoireToShownDto = new RepertoireToShownDto();
             Map<String, List<ShowingHourToRepertoirePageDto>> showingHourMap = new HashMap<>();
             for (Showing showing : repertoire.getShowing()) {
                 String movieTitle = showing.getMovie().getTitle();
@@ -40,31 +39,6 @@ public class RepertoireMapperDto implements EntityMapper<Repertoire, RepertoireT
 
         return new RepertoireToShownDto(repertoire.getRepertoireDate(), showMovieDtoList);
     }
-
-
-
-//    public List<RepertoireToShownDto> mapRepertoireListToDto(List<Repertoire> repertoireList) {
-//        List<RepertoireToShownDto> repertoireToShownDtoList = new ArrayList<>();
-//        for (Repertoire repertoire : repertoireList) {
-//            Map<String, List<ShowingHourToRepertoirePageDto>> showingHourMap = new HashMap<>();
-//            for (Showing showing : repertoire.getShowing()) {
-//                String movieTitle = showing.getMovie().getTitle();
-//                ShowingHourToRepertoirePageDto showingHourDto = new ShowingHourToRepertoirePageDto(
-//                        showing.getId(),
-//                        showing.getShowHour() + ":" + showing.getShowMin()
-//                );
-//                showingHourMap.computeIfAbsent(movieTitle, k -> new ArrayList<>()).add(showingHourDto);
-//            }
-//
-//            List<ShowMovieDto> showMovieDtoList = new ArrayList<>();
-//            for (Map.Entry<String, List<ShowingHourToRepertoirePageDto>> entry : showingHourMap.entrySet()) {
-//                showMovieDtoList.add(new ShowMovieDto(entry.getKey(), entry.getValue()));
-//            }
-//
-//            repertoireToShownDtoList.add(new RepertoireToShownDto(repertoire.getRepertoireDate(), showMovieDtoList));
-//        }
-//        return repertoireToShownDtoList;
-//    }
 
     @Override
     public Repertoire toEntity(RepertoireToMainPageDto repertoireToMainPageDto) {
