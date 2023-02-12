@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.constantCinemaData.ConstantDataForCinema;
-import pl.gajdek.alekino.domain.order.Orders;
+import pl.gajdek.alekino.domain.order.Order;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 import pl.gajdek.alekino.domain.showing.Showing;
 import pl.gajdek.alekino.enums.SeatStatus;
@@ -31,7 +31,7 @@ public class Ticket implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "orders_id")
-    private Orders orders;
+    private Order order;
 
     @OneToOne
     private ShowingSeat showingSeat;

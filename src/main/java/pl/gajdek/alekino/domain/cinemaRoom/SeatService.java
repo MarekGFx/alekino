@@ -48,11 +48,18 @@ public class SeatService {
     public ResponseEntity<?> addSeatToCinemaRoom(long id, AddSeatToCinemaRoomDto seatToAdd) {
         Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findById(id);
 
+
         if (cinemaRoom.isPresent()) {
+            List<Showing> showings = showingRepository.findByCinemaRoomId(cinemaRoom.get().getId());
+            if (!showings.isEmpty()){
+                return ResponseEntity.status(400).body("In this cinema hall are already scheduled screenings, " +
+                        "you can not now modify the arrangement of chairs in the hall");
+            }
             Seat seat = new Seat();
             seat.setRowNumber(seatToAdd.getRowNumber());
             seat.setSeatNumber(seatToAdd.getSeatNumber());
             seat.setCinemaRoom(cinemaRoom.get());
+            seat.setSeatsStatus(seatToAdd.getSeatsStatus());
 
             for (Seat s : cinemaRoom.get().getSeats()) {
                 if (s.getRowNumber() == seat.getRowNumber() && s.getSeatNumber() == seat.getSeatNumber()) {

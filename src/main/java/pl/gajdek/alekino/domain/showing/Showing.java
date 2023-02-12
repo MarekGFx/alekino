@@ -10,15 +10,12 @@ import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
 import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.movie.Movie;
-import pl.gajdek.alekino.domain.order.Orders;
 import pl.gajdek.alekino.domain.repertoire.Repertoire;
 import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
 import pl.gajdek.alekino.exceptions.DateTimeInPastException;
 
-import java.io.Serializable;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 

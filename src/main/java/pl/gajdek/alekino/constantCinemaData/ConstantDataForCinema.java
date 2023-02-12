@@ -10,4 +10,6 @@ public class ConstantDataForCinema {
 
     public static final int REST_IN_ROOM = 10;
 
+    public static final int HOUR_IN_MIN = 60;
+
 }
