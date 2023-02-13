@@ -23,7 +23,6 @@ import pl.gajdek.alekino.enums.Role;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,6 +76,8 @@ public class ShoppingCartService {
         Optional<ShoppingCart> shoppingCart = shoppingCartRepository.findById(shoppingCartId);
         if (!shoppingCart.isPresent()) {
             return ResponseEntity.status(404).body("Shopping cart does not exist");
+        } else if (shoppingCart.get().getStatus().equals(CartStatus.CLOSED)){
+            return ResponseEntity.status(404).body("Shopping cart is empty");
         }
         else {
             ShoppingCartDto shoppingCartDto = shoppingDtoMapper.mapToShoppingCartDto(shoppingCart.get());
@@ -97,7 +98,7 @@ public class ShoppingCartService {
         if (!shoppingCart.isPresent()) {
             return ResponseEntity.status(404).body("Have not made any purchases there is nothing to summarize");
         } else if (shoppingCart.get().getStatus().equals(CartStatus.CLOSED)) {
-            return ResponseEntity.status(400).body("The shopping cart has been summarized, pay your order first");
+            return ResponseEntity.status(400).body("The shopping cart has been summarized and it's empty");
         } else {
             if (optionalUser.isPresent() && !optionalUser.get().getFirstName().equals(userToOrder.getFirstName())
                     || optionalUser.isPresent() && !optionalUser.get().getLastName().equals(userToOrder.getLastName())){

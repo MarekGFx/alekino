@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class RepertoireMapperDto implements EntityMapper<Repertoire, RepertoireToMainPageDto>  {
 
     public RepertoireToShownDto mapRepertoireToDto(Repertoire repertoire) {
-//        RepertoireToShownDto repertoireToShownDto = new RepertoireToShownDto();
             Map<String, List<ShowingHourToRepertoirePageDto>> showingHourMap = new HashMap<>();
             for (Showing showing : repertoire.getShowing()) {
                 String movieTitle = showing.getMovie().getTitle();

@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
-import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.movie.Movie;
 import pl.gajdek.alekino.domain.repertoire.Repertoire;
 import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
@@ -24,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Showing  { //implements Serializable {
+public class Showing  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +44,6 @@ public class Showing  { //implements Serializable {
 
     @OneToMany(mappedBy = "showing")
     private List<ShowingSeat> seats;
-
-
 
     public long getId() {
         return id;

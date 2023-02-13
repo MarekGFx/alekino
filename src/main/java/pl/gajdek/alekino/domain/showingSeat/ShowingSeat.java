@@ -1,6 +1,5 @@
 package pl.gajdek.alekino.domain.showingSeat;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.domain.showing.Showing;
 import pl.gajdek.alekino.enums.SeatStatus;
-
-import java.io.Serializable;
 
 @Getter
 @Setter

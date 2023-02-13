@@ -11,7 +11,7 @@ import pl.gajdek.alekino.domain.user.dto.UserDto;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("blik")
+@RequestMapping("orders")
 public class OrderController {
 
     private OrderService orderService;
@@ -20,9 +20,15 @@ public class OrderController {
     private HttpSession session;
 
 
-    @PatchMapping
+    @PatchMapping("/blik")
     @Operation(summary = "Pay for Order with BLIK")
     public ResponseEntity<?> payForOrder(@RequestParam(name = "BILK NUMBER") int blikNumber){
         return orderService.payForTheOrder(blikNumber,session);
+    }
+
+    @GetMapping
+    @Operation(summary = "Get unpaid orders list by user")
+    public ResponseEntity<?> findUnpaidOrders(@RequestParam(name = "email")String email) {
+        return orderService.findUnpaidOrders(email);
     }
 }

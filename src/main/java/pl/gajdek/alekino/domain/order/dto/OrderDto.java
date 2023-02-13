@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDto {
 
+    private long id;
     private List<TicketToShoppingCartDto> tickets;
     private double summaryPrice;
     private LocalDate orderDate;

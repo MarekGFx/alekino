@@ -10,10 +10,15 @@ import pl.gajdek.alekino.domain.invoice.Invoice;
 import pl.gajdek.alekino.domain.invoice.InvoiceRepository;
 import pl.gajdek.alekino.domain.invoice.dto.InvoiceDto;
 import pl.gajdek.alekino.domain.invoice.map.InvoiceDtoMapper;
+import pl.gajdek.alekino.domain.order.map.OrderDtoMapper;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCartRepository;
+import pl.gajdek.alekino.domain.user.User;
+import pl.gajdek.alekino.domain.user.UserRepository;
 import pl.gajdek.alekino.enums.OrderStatus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,9 +28,10 @@ public class OrderService {
     private ShoppingCartRepository shoppingCartRepository;
     private OrderRepository orderRepository;
     private BlikRepository blikRepository;
-
     private InvoiceRepository invoiceRepository;
+    private UserRepository userRepository;
     private InvoiceDtoMapper invoiceDtoMapper;
+    private OrderDtoMapper orderDtoMapper;
 
 
     public ResponseEntity<?> payForTheOrder(int blikNumber, HttpSession session){
@@ -54,4 +60,22 @@ public class OrderService {
                 return ResponseEntity.status(404).body("Invalid blik code");
         }
     }
+
+    public ResponseEntity<?> findUnpaidOrders(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (!user.isPresent()){
+            return ResponseEntity.status(404).body("User with email " + email + " does not exist");
+        } else {
+            List<Order> orders = user.get().getOrder();
+            List<Order> unpaid = new ArrayList<>();
+            for (Order order : orders) {
+                if (order.getStatus().equals(OrderStatus.PENDING)){
+                    unpaid.add(order);
+                }
+            }
+            return ResponseEntity.ok(unpaid.stream().map(orderDtoMapper::toDto));
+        }
+    }
+
+
 }

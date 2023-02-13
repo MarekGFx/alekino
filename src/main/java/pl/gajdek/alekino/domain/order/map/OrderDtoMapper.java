@@ -23,6 +23,7 @@ public class OrderDtoMapper implements EntityMapper<Order, OrderDto> {
     @Override
     public OrderDto toDto(Order order) {
         return new OrderDto(
+                order.getId(),
                 order.getTicketList().stream().map(ticketDtoMapper::mapToTicketDto).toList(),
                 order.getSummaryPrice(),
                 order.getOrderDate(),
