@@ -64,15 +64,14 @@ public class ShowingSeatService {
         } else if(seat.get().isBusy()) {
             return ResponseEntity.status(400).body("Seat is busy");
         } else {
-            seat.get().setBusy(true);
             Ticket ticket = new Ticket();
             ticket.setShowingSeat(seat.get());
             ticket.setShowing(seat.get().getShowing());
             ticket.setTicketPrice(seat.get().getSeatsStatus());
-            showingSeatRepository.save(seat.get());
             ticketServices.addTicket(ticket);
+            seat.get().setBusy(true);
+            showingSeatRepository.save(seat.get());
             ticketRepository.save(ticket);
-
             return ResponseEntity.status(200).body("Ticket added to shopping cart");
         }
     }

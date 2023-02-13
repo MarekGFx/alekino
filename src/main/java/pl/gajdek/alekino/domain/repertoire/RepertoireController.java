@@ -4,10 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.gajdek.alekino.domain.repertoire.Repertoire;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor

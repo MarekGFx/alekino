@@ -20,10 +20,9 @@ public class Session implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-//    @Column(name = "SESSION_ID")
+
     private String primaryId;
 
-//    @Column(name = "SESSION_ID")
     private String sessionId;
 
     private String creationTime;
@@ -34,13 +33,5 @@ public class Session implements Serializable {
 
     private String expiryTime;
     private String principalName;
-
- //   private String
-
-//    @Column(name = "ATTRIBUTE_NAME")
-//    private String attributeName;
-//
-//    @Column(name = "ATTRIBUTE_VALUE")
-//    private byte[] attributeValue;
 
 }

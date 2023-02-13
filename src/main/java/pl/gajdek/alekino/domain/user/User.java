@@ -2,8 +2,11 @@ package pl.gajdek.alekino.domain.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.gajdek.alekino.domain.order.Order;
 import pl.gajdek.alekino.domain.shoppingCart.ShoppingCart;
 import pl.gajdek.alekino.enums.Role;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,7 +26,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToOne
-    private ShoppingCart shoppingCart;
+//    @OneToOne
+//    private ShoppingCart shoppingCart;
 
+    @OneToMany
+    private List<Order> order;
 }

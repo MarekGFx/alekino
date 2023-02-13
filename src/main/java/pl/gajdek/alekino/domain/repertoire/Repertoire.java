@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.gajdek.alekino.domain.movie.Movie;
 import pl.gajdek.alekino.domain.showing.Showing;
 
 import java.time.DayOfWeek;

@@ -40,7 +40,7 @@ public class ShowingController {
     @Transactional
     @PatchMapping("/create-show")
     @Operation(summary = "Create new cinema show")
-    public ResponseEntity<?> addMovie(@RequestBody @Valid CreateShowDto show){
+    public ResponseEntity<?> addShowing(@RequestBody @Valid CreateShowDto show){
         return showingServices.createShow(show);
     }
 }

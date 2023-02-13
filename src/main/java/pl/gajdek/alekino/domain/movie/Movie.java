@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.domain.genere.Genre;
-import pl.gajdek.alekino.domain.repertoire.Repertoire;
 
 import java.time.LocalDate;
 
@@ -22,7 +21,6 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotBlank
     @Size(max = 255)
     private String title;
@@ -59,11 +57,6 @@ public class Movie {
             }
             this.title = title;
     }
-
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-
 
     public String getPoster() {
         return poster;
@@ -105,13 +98,9 @@ public class Movie {
         this.shortDescription = shortDescription;
     }
 
-
-
     public LocalDate getReleaseDate() {
         return releaseDate;
-    }  //TODO czemu obiekt? nie wystarczy int? moze jakas data?
-
-
+    }
 
     public void setReleaseDate(LocalDate releaseDate) {
         System.out.println(releaseDate);
@@ -120,7 +109,7 @@ public class Movie {
 
     public int getRunTimeInMin() {
         return runTimeInMin;
-    } //TODO czemu Integer? w minutach? sekundach?
+    }
 
     public void setRunTimeInMin(int runTimeInMin) {
         try {
@@ -136,11 +125,6 @@ public class Movie {
             System.out.println("Błędny czas trwania filmu");
         }
     }
-
-
-  //  public void setRunTimeInMin(Integer runTimeInMin) {
-//        this.runTimeInMin = runTimeInMin;
-//    }
 
     public Double getRating() {
         return rating;

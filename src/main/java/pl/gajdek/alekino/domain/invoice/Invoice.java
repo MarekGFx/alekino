@@ -6,9 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.gajdek.alekino.domain.order.Orders;
+import pl.gajdek.alekino.domain.order.Order;
 
-import java.time.YearMonth;
+import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,14 +24,16 @@ public class Invoice {
     private Long id;
     private String invoiceNumber;
     @OneToOne
-    private Orders orders;
+    private Order order;
 
     public String getInvoiceNumber() {
         return invoiceNumber;
     }
 
-    public void setInvoiceNumber() {
-        YearMonth yearMonth = YearMonth.now();
-        this.invoiceNumber = yearMonth + "/" + id;
+    public void setInvoiceNumber(Order order) {
+        Year year = Year.now();
+        int month = LocalDate.now().getMonthValue();
+        int day = LocalDate.now().getDayOfMonth();
+        this.invoiceNumber = year + "/" + month + "/" + day + "/" + order.getId();
     }
 }

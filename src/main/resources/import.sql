@@ -54,9 +54,13 @@ insert into seat( row_number, seat_number, seats_status, cinema_room_id) values 
 insert into seat( row_number, seat_number, seats_status, cinema_room_id) values ( 3, 2, 'NORMAL', 2)
 insert into seat( row_number, seat_number, seats_status, cinema_room_id) values ( 3, 3, 'NORMAL', 2)
 
-insert into users(email, first_name, last_name, role, shopping_cart_id) values ('email@wp.pl', 'testuser1', 'testuser1', 'USER', null)
+insert into users(email, first_name, last_name, role) values ('email@wp.pl', 'testuser1', 'testuser1', 'USER')
 
-insert into repertoire(day_of_week, repertoire_date) values ('FRIDAY', '2023-02-10')
+insert into blik(blik_number) values (123456)
+insert into blik(blik_number) values (321654)
+insert into blik(blik_number) values (987432)
+
+--insert into repertoire(day_of_week, repertoire_date) values ('FRIDAY', '2023-02-10')
 
 --insert into showing(date, show_hour,cinema_room_id,movie_id,repertoire_id) values ('2023-02-16', 12.30, 1, 2, 1)
 --insert into showing(date, show_hour,cinema_room_id,movie_id,repertoire_id) values ('2023-02-16', 12.30, 1, 2, 1)

@@ -1,6 +1,5 @@
 package pl.gajdek.alekino.domain.showingSeat;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +25,14 @@ public class ShowingSeat {
     @ManyToOne
     @JoinColumn(name = "showing_id")
     private Showing showing;
+
+    public ShowingSeat(boolean isBusy, int rowNumber, int seatNumber, SeatStatus seatsStatus, Showing showing) {
+        this.isBusy = isBusy;
+        this.rowNumber = rowNumber;
+        this.seatNumber = seatNumber;
+        this.seatsStatus = seatsStatus;
+        this.showing = showing;
+    }
 
     public boolean isBusy() {
         return isBusy;

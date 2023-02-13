@@ -48,11 +48,18 @@ public class SeatService {
     public ResponseEntity<?> addSeatToCinemaRoom(long id, AddSeatToCinemaRoomDto seatToAdd) {
         Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findById(id);
 
+
         if (cinemaRoom.isPresent()) {
+            List<Showing> showings = showingRepository.findByCinemaRoomId(cinemaRoom.get().getId());
+            if (!showings.isEmpty()){
+                return ResponseEntity.status(400).body("In this cinema hall are already scheduled screenings, " +
+                        "you can not now modify the arrangement of chairs in the hall");
+            }
             Seat seat = new Seat();
             seat.setRowNumber(seatToAdd.getRowNumber());
             seat.setSeatNumber(seatToAdd.getSeatNumber());
             seat.setCinemaRoom(cinemaRoom.get());
+            seat.setSeatsStatus(seatToAdd.getSeatsStatus());
 
             for (Seat s : cinemaRoom.get().getSeats()) {
                 if (s.getRowNumber() == seat.getRowNumber() && s.getSeatNumber() == seat.getSeatNumber()) {
@@ -141,46 +148,5 @@ public class SeatService {
         }
     }
 
-//    public ResponseEntity<?> reserveSeat(long seatId, long showingId, long userID){
-//        Optional<Seat> seat = seatRepository.findById(seatId);
-//        Optional<Showing> showing = showingRepository.findById(showingId);
-//        Optional<User> user = userRepository.findById(userID);
-//        if (seat.isPresent()) {
-//            if (seat.get().isBusy()) {
-//                return ResponseEntity.status(400).body("Seat is busy");
-//            } else {
-//
-//                Ticket ticket = new Ticket();
-//                Optional<ShoppingCart> shoppingCart = Optional.empty(); //TODO check this is null in that way
-//                if (user.get().getShoppingCart() != null){
-//                    shoppingCart = shoppingCartRepository.findById(user.get().getShoppingCart().getId());
-//                }
-//
-//                ticket.setSeat(seat.get());
-//                ticket.setShowing(showing.get());
-//                ticket.setTicketPrice(seat.get().getSeatsStatus());
-//                ticketRepository.save(ticket);
-//                seat.get().setBusy(true);
-//
-//                if (shoppingCart.isPresent()) {  //TODO check this is null in that way
-//                    shoppingCart.get().getTicket().add(ticket);
-//                    ticket.setShoppingCart(shoppingCart.get());
-//                    shoppingCartRepository.save(shoppingCart.get());
-//                } else {
-//                    ShoppingCart newShoppingCart = new ShoppingCart();
-//                    List<Ticket> ticketList = new ArrayList<>();
-//                    ticketList.add(ticket);
-//                    newShoppingCart.setTicket(ticketList);
-//                    user.get().setShoppingCart(newShoppingCart);
-//                    ticket.setShoppingCart(newShoppingCart);
-//                    shoppingCartRepository.save(newShoppingCart);
-//
-//                }
-//                return ResponseEntity.status(200).body("Added ticket to shoppingCart");
-//            }
-//        }
-//        else
-//            return ResponseEntity.status(404).body("Seat whit this id" + seatId + " does not exist");
-//    }
 }
 

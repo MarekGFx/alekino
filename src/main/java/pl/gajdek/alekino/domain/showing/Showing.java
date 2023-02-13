@@ -8,16 +8,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.gajdek.alekino.domain.cinemaRoom.CinemaRoom;
-import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.movie.Movie;
-import pl.gajdek.alekino.domain.order.Orders;
 import pl.gajdek.alekino.domain.repertoire.Repertoire;
 import pl.gajdek.alekino.domain.showingSeat.ShowingSeat;
 import pl.gajdek.alekino.exceptions.DateTimeInPastException;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 
@@ -26,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Showing {
+public class Showing  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,8 +44,6 @@ public class Showing {
 
     @OneToMany(mappedBy = "showing")
     private List<ShowingSeat> seats;
-
-
 
     public long getId() {
         return id;
