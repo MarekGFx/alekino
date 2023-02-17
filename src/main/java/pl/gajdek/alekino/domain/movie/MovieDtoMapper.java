@@ -3,6 +3,8 @@ package pl.gajdek.alekino.domain.movie;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
 import pl.gajdek.alekino.domain.movie.dto.MovieToTicketInfoDto;
 
+import java.time.LocalDate;
+
 public class MovieDtoMapper {
 
     static MovieDto mapToMovieDto(Movie movie) {

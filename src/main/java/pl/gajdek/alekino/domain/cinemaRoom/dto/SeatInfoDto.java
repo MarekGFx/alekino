@@ -14,6 +14,6 @@ public class SeatInfoDto {
 
     private int positionRow;
     private int positionCol;
-    private int seatNumber; //Todo add to
+    private int seatNumber;
     private int cinemaRoomNumber;
 }

@@ -7,6 +7,7 @@ import pl.gajdek.alekino.constantCinemaData.ConstantDataForCinema;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.CinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.NewCinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.map.CinemaRoomMapper;
+import pl.gajdek.alekino.enums.SeatStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class CinemaRoomService {
 
     private CinemaRoomRepository cinemaRoomRepository;
 
-    public ResponseEntity<List<CinemaRoomDto>> getCinemaRooms(){
+    public ResponseEntity<List<?>> getCinemaRooms(){
         return  ResponseEntity.ok(cinemaRoomRepository.findAll().stream().map(CinemaRoomMapper::map).toList());
     }
 
@@ -48,6 +49,5 @@ public class CinemaRoomService {
         else
             return ResponseEntity.status(400).body("Cant add new room");
     }
-
 
 }

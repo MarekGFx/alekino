@@ -27,4 +27,11 @@ public class Seat {
     @JoinColumn(name = "cinema_room_id")
     private CinemaRoom cinemaRoom;
 
+    public SeatStatus getSeatsStatus() {
+        return seatsStatus;
+    }
+
+    public void setSeatsStatus(SeatStatus seatsStatus){
+        this.seatsStatus = seatsStatus;
+    }
 }

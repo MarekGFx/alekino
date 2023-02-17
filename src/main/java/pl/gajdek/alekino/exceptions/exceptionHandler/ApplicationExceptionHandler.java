@@ -1,14 +1,12 @@
 package pl.gajdek.alekino.exceptions.exceptionHandler;
 
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import pl.gajdek.alekino.exceptions.DateTimeInPastException;
+import pl.gajdek.alekino.exceptions.AleKinoExceptions;
 import pl.gajdek.alekino.exceptions.UniqueDataConstraintException;
 
 import java.time.format.DateTimeParseException;
@@ -29,14 +27,6 @@ public class ApplicationExceptionHandler {
         return errorMap;
     }
 
-    @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler(UniqueDataConstraintException.class)
-    public Map<String, String> handleBusinessException(UniqueDataConstraintException ex){
-        Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage", ex.getMessage());
-        return errorMap;
-    }
-
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NoSuchElementException.class)
     public Map<String, String> handleBusinessException(NoSuchElementException ex){
@@ -49,26 +39,27 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(DateTimeParseException.class)
     public Map<String, String> handleBusinessException(DateTimeParseException ex){
         Map<String, String> errorMap = new HashMap<>();
-        errorMap.put("errorMessage", "date: " + ex.getParsedString()
-                + " is incorrect, give the date according to the pattern yyyy-MM-dd");
+        errorMap.put("errorMessage", "date: " + "(" + ex.getParsedString() + ")"
+                + " is incorrect, give the date according to the pattern " +
+                "yyyy-MM-ddT HH:mm:ssZ in LocalDateTime or yyyy-MM-dd in LocalDate");
         return errorMap;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(DateTimeInPastException.class)
-    public Map<String, String> handleBusinessException(DateTimeInPastException ex){
+    @ExceptionHandler(IllegalArgumentException.class)
+    public Map<String, String> handleBusinessException(IllegalArgumentException ex){
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", ex.getMessage());
         return errorMap;
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(InvalidFormatException.class)
-//    public Map<String, String> handleBusinessException(InvalidFormatException ex){
-//        Map<String, String> errorMap = new HashMap<>();
-//        errorMap.put("errorMessage", (String) ex.getValue() + " invalid data");
-//        return errorMap;
-//    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(AleKinoExceptions.class)
+    public Map<String, String> handleBusinessException(AleKinoExceptions ex){
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
+    }
 
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    @ExceptionHandler(HttpMessageNotReadableException.class)

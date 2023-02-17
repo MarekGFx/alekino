@@ -33,11 +33,6 @@ public class GenreController {
 
     @PostMapping("/genres/add-genre")
     public void addGenre(@RequestBody @Valid GenreDto genre) throws UniqueDataConstraintException {
-
-//            if (genreService.findGenreByName(genre.getName()).equals(true)) {
-//                throw new SQLIntegrityConstraintViolationException("Name genre:" + genre + "already exist");
-//            }
-
         genreService.addGenre(genre);
     }
 }

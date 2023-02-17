@@ -142,11 +142,11 @@ public class ShowingServices {
     }
 
     private int getHourFromMovieRunTime(int time){
-        return time/60;
+        return time/ConstantDataForCinema.HOUR_IN_MIN;
     }
 
     private int getMinFromMovieRunTime(int time){
-        return time - (getHourFromMovieRunTime(time) * 60);
+        return time - (getHourFromMovieRunTime(time) * ConstantDataForCinema.HOUR_IN_MIN);
     }
 
 

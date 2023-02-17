@@ -2,7 +2,6 @@ package pl.gajdek.alekino.domain.cinemaRoom.map;
 
 import pl.gajdek.alekino.domain.cinemaRoom.Seat;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.SeatDto;
-import pl.gajdek.alekino.domain.cinemaRoom.dto.SeatInfoDto;
 
 public class SeatDtoMapper {
 
@@ -15,12 +14,12 @@ public class SeatDtoMapper {
         );
    }
 
-   public static SeatInfoDto mapToSeatInfoDto(Seat seat){
-       return new SeatInfoDto(
-               seat.getRowNumber(),
-               seat.getSeatNumber(),
-               seat.getSeatNumber(),
-               seat.getCinemaRoom().getRoomNumber()
-       );
-   }
+//   public static SeatInfoDto mapToSeatInfoDto(Seat seat){
+//       return new SeatInfoDto(
+//               seat.getRowNumber(),
+//               seat.getSeatNumber(),
+//               seat.getSeatNumber(),
+//               seat.getCinemaRoom().getRoomNumber()
+//       );
+//   }
 }
