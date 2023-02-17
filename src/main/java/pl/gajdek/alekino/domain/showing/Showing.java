@@ -59,7 +59,7 @@ public class Showing  {
 
     public void setStartTime(LocalDateTime startTime)  {
         if (startTime.compareTo(LocalDateTime.now()) <= 0){
-            throw new DateTimeInPastException("Showing start time cant be in de past");
+            throw new DateTimeInPastException("Showing start time cant be in the past");
         }
         this.startTime = startTime;
     }

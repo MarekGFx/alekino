@@ -1,11 +1,8 @@
 package pl.gajdek.alekino.domain.movie.dto;
 
-
-
-
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
-import pl.gajdek.alekino.exceptions.CustomDateConstraint;
+
 
 import java.time.LocalDate;
 
@@ -31,11 +28,6 @@ public class MovieDto {
     @NotBlank(message = "Short description shouldn't be blank")
     private String shortDescription;
 
-//    @Past(message = "date can't be current date")
-//    @NotNull(message = "Release date shouldn't be null")
-//    @JsonFormat(pattern="yyyy-MM-dd")
-
-    @CustomDateConstraint
     private LocalDate releaseDate;
 
     @Min(value = 1, message = "run time shouldn't be less than 1 min")
@@ -120,10 +112,6 @@ public class MovieDto {
 
     public LocalDate getReleaseDate() {
         return releaseDate;
-    }
-
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
     }
 
     public int getRunTimeInMin() {

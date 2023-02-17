@@ -5,9 +5,13 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.AddSeatToCinemaRoomDto;
 import pl.gajdek.alekino.domain.cinemaRoom.dto.NewCinemaRoomDto;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -43,8 +47,8 @@ public class CinemaRoomController {
     @PatchMapping("/{id}/seats")
     @Operation(summary = "Add seat to cinema room")
     public ResponseEntity<?> addSeatToCinemaRoom(@PathVariable("id") long id,
-                                                 @RequestBody @Valid AddSeatToCinemaRoomDto seatDto){
-        return seatService.addSeatToCinemaRoom(id,seatDto);
+                                                 @RequestBody @Valid AddSeatToCinemaRoomDto seatToAdd){
+        return seatService.addSeatToCinemaRoom(id,seatToAdd);
     }
 
     @Transactional
@@ -53,4 +57,5 @@ public class CinemaRoomController {
     public ResponseEntity<?> mergeSeatsToVipDoubleCouch(long cinemaRoomId, long firstSeatId, long secondSeatId){
         return seatService.setSeatStatus(cinemaRoomId,firstSeatId,secondSeatId);
     }
+
 }

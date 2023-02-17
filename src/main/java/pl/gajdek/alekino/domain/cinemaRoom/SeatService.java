@@ -47,8 +47,6 @@ public class SeatService {
 
     public ResponseEntity<?> addSeatToCinemaRoom(long id, AddSeatToCinemaRoomDto seatToAdd) {
         Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findById(id);
-
-
         if (cinemaRoom.isPresent()) {
             List<Showing> showings = showingRepository.findByCinemaRoomId(cinemaRoom.get().getId());
             if (!showings.isEmpty()){
@@ -59,7 +57,7 @@ public class SeatService {
             seat.setRowNumber(seatToAdd.getRowNumber());
             seat.setSeatNumber(seatToAdd.getSeatNumber());
             seat.setCinemaRoom(cinemaRoom.get());
-            seat.setSeatsStatus(seatToAdd.getSeatsStatus());
+            seat.setSeatsStatus(getStatus(seatToAdd.getSeatsStatus()));
 
             for (Seat s : cinemaRoom.get().getSeats()) {
                 if (s.getRowNumber() == seat.getRowNumber() && s.getSeatNumber() == seat.getSeatNumber()) {
@@ -146,6 +144,10 @@ public class SeatService {
                 }
             }
         }
+    }
+
+    private SeatStatus getStatus(String seatsStatus) {
+        return SeatStatus.valueOf(seatsStatus.toUpperCase());
     }
 
 }

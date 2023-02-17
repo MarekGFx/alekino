@@ -15,13 +15,10 @@ public class SessionAttributes implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-
         @Column(name = "SESSION_PRIMARY_ID")
         private String sessionPrimaryId;
-
         @Column(name = "ATTRIBUTE_NAME")
         private String attributeName;
-
         @Column(name = "ATTRIBUTE_BYTES", length = 4000)
         private byte[] attributeBytes;
 

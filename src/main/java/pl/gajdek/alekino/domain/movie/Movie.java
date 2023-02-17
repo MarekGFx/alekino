@@ -103,7 +103,6 @@ public class Movie {
     }
 
     public void setReleaseDate(LocalDate releaseDate) {
-        System.out.println(releaseDate);
         this.releaseDate = releaseDate;
     }
 
@@ -120,7 +119,6 @@ public class Movie {
                 throw new ArithmeticException("RunTime can not be grater than 400 min");
             }
             this.runTimeInMin = runTimeInMin;
-            System.out.println(runTimeInMin);
         }catch (ArithmeticException e){
             System.out.println("Błędny czas trwania filmu");
         }
