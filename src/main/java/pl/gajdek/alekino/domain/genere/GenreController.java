@@ -1,12 +1,11 @@
 package pl.gajdek.alekino.domain.genere;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import pl.gajdek.alekino.domain.genere.GenreService;
 import pl.gajdek.alekino.domain.genere.dto.GenreDto;
 import pl.gajdek.alekino.domain.movie.MovieService;
@@ -16,6 +15,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
+@RequestMapping("genres")
 public class GenreController {
 
     private final GenreService genreService;
@@ -27,12 +27,14 @@ public class GenreController {
     }
 
     @GetMapping("/genres")
-    public List<GenreDto> getGenres(){
+    @Operation(summary = "Get genre list")
+    public ResponseEntity<?> getGenres(){
         return genreService.findAllGenres();
     }
 
-    @PostMapping("/genres/add-genre")
-    public void addGenre(@RequestBody @Valid GenreDto genre) throws UniqueDataConstraintException {
-        genreService.addGenre(genre);
+    @PostMapping("/add-genre")
+    @Operation(summary = "Add genre")
+    public ResponseEntity<?> addGenre(@RequestBody @Valid GenreDto genre) {
+       return genreService.addGenre(genre);
     }
 }

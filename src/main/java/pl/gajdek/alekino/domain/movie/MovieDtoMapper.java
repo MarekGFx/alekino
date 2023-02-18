@@ -9,7 +9,6 @@ public class MovieDtoMapper {
 
     static MovieDto mapToMovieDto(Movie movie) {
         return new MovieDto(
-                movie.getId(),
                 movie.getTitle(),
                 movie.getPoster(),
                 movie.getGenre().getName(),
