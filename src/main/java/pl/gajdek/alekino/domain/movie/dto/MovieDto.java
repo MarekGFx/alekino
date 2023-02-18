@@ -9,39 +9,33 @@ import java.time.LocalDate;
 
 public class MovieDto {
 
-    private Long id;
     @NotNull(message = "Movie title shouldn't be null")
     @NotBlank(message = "Movie title shouldn't be blank")
     private String title;
     @URL(message = "invalid URL")
     private String poster;
-
-
     @NotNull(message = "Genre shouldn't be null")
     @NotBlank(message = "Genre shouldn't be blank")
     private String genre;
-
     @NotBlank(message = "PGA shouldn't be blank")
     private String pga;
     @NotBlank(message = "description shouldn't be blank")
     private String description;
     @NotBlank(message = "Short description shouldn't be blank")
     private String shortDescription;
-
+    @Past(message = "Release data cant be in the future")
     private LocalDate releaseDate;
-
     @Min(value = 1, message = "run time shouldn't be less than 1 min")
     @Max(value = 400, message = "run time shouldn't be grater than 400 min")
-
     private int runTimeInMin;
     @Min(value = 0, message = "rating shouldn't be less than 0 score")
     @Max(value = 10, message = "rating shouldn't be grater than 10 score")
     private Double rating;
     private boolean premiere;
-    public MovieDto(Long id, String title, String poster, String genre,
+
+    public MovieDto(String title, String poster, String genre,
                     String pga, String description, String shortDescription,
                     LocalDate releaseDate, int runTimeInMin, Double rating, boolean premiere) {
-        this.id = id;
         this.title = title;
         this.poster = poster;
         this.genre = genre;
@@ -52,14 +46,6 @@ public class MovieDto {
         this.runTimeInMin = runTimeInMin;
         this.rating = rating;
         this.premiere = premiere;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

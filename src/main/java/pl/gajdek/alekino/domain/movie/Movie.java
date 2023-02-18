@@ -1,12 +1,12 @@
 package pl.gajdek.alekino.domain.movie;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 import pl.gajdek.alekino.domain.genere.Genre;
 
 import java.time.LocalDate;
@@ -24,19 +24,30 @@ public class Movie {
     @NotBlank
     @Size(max = 255)
     private String title;
+    @URL
+    @Size(max = 2000)
     private String poster;
     @ManyToOne
     private Genre genre;
+    @NotBlank
+    @Size(max = 50)
     private String pga;
     @NotBlank
     @Size(max = 10000)
     private String description;
     @NotBlank
-    @Size(max = 300)
+    @Size(max = 500)
     private String shortDescription;
+    @NotNull
     private LocalDate releaseDate;
+    @NotNull
+    @Min(1)
+    @Max(400)
     private int runTimeInMin;
+    @Min(0)
+    @Max(10)
     private Double rating;
+    @NotNull
     private boolean premiere;
 
     public Long getId() {

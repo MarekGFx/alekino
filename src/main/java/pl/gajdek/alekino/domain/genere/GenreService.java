@@ -1,5 +1,6 @@
 package pl.gajdek.alekino.domain.genere;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.gajdek.alekino.domain.genere.dto.GenreDto;
 import pl.gajdek.alekino.exceptions.UniqueDataConstraintException;
@@ -22,19 +23,20 @@ public class GenreService {
                 .map(GenreDtoMapper::map);
     }
 
-    public List<GenreDto> findAllGenres(){
-        return StreamSupport.stream(genreRepository.findAll().spliterator(), false)
+    public ResponseEntity<?> findAllGenres(){
+        return ResponseEntity.ok(StreamSupport.stream(genreRepository.findAll().spliterator(), false)
                 .map(GenreDtoMapper::map)
-                .toList();
+                .toList());
     }
 
-    public void addGenre(GenreDto genre) throws UniqueDataConstraintException {
+    public ResponseEntity<?> addGenre(GenreDto genre) {
         Genre genreToSave = new Genre();
-            genreToSave.setName(genre.getName());
-            if (findGenreByName(genre.getName()).isPresent()){
-                throw new UniqueDataConstraintException("genre: " + genre.getName() + " already exist");
-            }
+        genreToSave.setName(genre.getName());
+        if (findGenreByName(genre.getName()).isPresent()){
+            return ResponseEntity.status(400).body("genre: " + genre.getName() + " already exist");
+        }
         genreToSave.setDescription(genre.getDescription());
         genreRepository.save(genreToSave);
+        return ResponseEntity.ok(genreToSave);
     }
 }
