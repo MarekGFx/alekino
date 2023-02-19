@@ -17,7 +17,7 @@ public class MovieDtoMapper {
                 movie.getShortDescription(),
                 movie.getReleaseDate(),
                 movie.getRunTimeInMin(),
-                movie.getRating(),
+                movie.getMovieRating(),
                 movie.isPremiere()
         );
     }

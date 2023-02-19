@@ -10,12 +10,14 @@ import org.hibernate.validator.constraints.URL;
 import pl.gajdek.alekino.domain.genere.Genre;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
 public class Movie {
 
     @Id
@@ -46,9 +48,11 @@ public class Movie {
     private int runTimeInMin;
     @Min(0)
     @Max(10)
-    private Double rating;
+    private Double averageRating;
     @NotNull
     private boolean premiere;
+
+    private List<Integer> ratings = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -135,12 +139,22 @@ public class Movie {
         }
     }
 
-    public Double getRating() {
-        return rating;
+    public Double getMovieRating() {
+        return averageRating;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setMovieRating() {
+        double sumRating;
+        if (ratings.isEmpty()){
+            sumRating = 0.0;
+        } else {
+            double sum = 0;
+            for (int rating : ratings) {
+                sum += rating;
+            }
+            sumRating = sum/ratings.size();
+        }
+        this.averageRating = sumRating;
     }
 
     public boolean isPremiere() {
@@ -149,5 +163,26 @@ public class Movie {
 
     public void setPremiere(boolean premiere) {
         this.premiere = premiere;
+    }
+
+    public void addRating(int rating){
+        if (getRatings() == null) {
+            System.out.println("jak jest null dodaje listęi ocenę");
+            List<Integer> ratings = new ArrayList<>();
+            ratings.add(rating);
+            setRatings(ratings);
+        } else {
+            System.out.println(" dodaje ocenę");
+            getRatings().add(rating);
+        }
+
+    }
+
+    public List<Integer> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Integer> ratings) {
+        this.ratings = ratings;
     }
 }
