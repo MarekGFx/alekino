@@ -47,4 +47,12 @@ public class MovieController {
     public ResponseEntity<?> addMovie(@RequestBody @Valid MovieDto movie) {
        return movieService.addMovie(movie);
     }
+
+    @PatchMapping("/rate-movie/{movieId}/auth-user/{authUserId}")
+    @Operation(summary = "Rate movie")
+    public ResponseEntity<?> rateMovie(@PathVariable("movieId") long movieId,
+                                       @RequestParam int rating,
+                                       @PathVariable("authUserId") long authUserId) {
+        return  movieService.rateMovie(movieId,rating,authUserId);
+    }
 }

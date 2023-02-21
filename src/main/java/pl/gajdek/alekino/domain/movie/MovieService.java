@@ -1,7 +1,10 @@
 package pl.gajdek.alekino.domain.movie;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import pl.gajdek.alekino.domain.authUser.AuthUserRepository;
+import pl.gajdek.alekino.domain.authUser.AuthUsers;
 import pl.gajdek.alekino.domain.genere.Genre;
 import pl.gajdek.alekino.domain.genere.GenreRepository;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
@@ -11,16 +14,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class MovieService {
 
     private final MovieRepository movieRepository;
-
     private final GenreRepository genreRepository;
+    private final AuthUserRepository authUserRepository;
 
-    public MovieService(MovieRepository movieRepository, GenreRepository genreRepository) {
-        this.movieRepository = movieRepository;
-        this.genreRepository = genreRepository;
-    }
 
     public ResponseEntity<?> getMovies() {
         return ResponseEntity.ok(movieRepository.findAll().stream().map(MovieDtoMapper::mapToMovieDto).toList());
@@ -65,9 +65,25 @@ public class MovieService {
         movie.setShortDescription(movieToSave.getShortDescription());
         movie.setReleaseDate(movieToSave.getReleaseDate());
         movie.setRunTimeInMin(movieToSave.getRunTimeInMin());
-        movie.setRating(movieToSave.getRating());
+        movie.setMovieRating();
         movie.setPremiere(movieToSave.isPremiere());
         movieRepository.save(movie);
         return ResponseEntity.ok(movie);
+    }
+
+    public ResponseEntity<?> rateMovie(long id, int rating, long authUserId){
+        Optional<Movie> movie = movieRepository.findById(id);
+        Optional<AuthUsers> authUsers = authUserRepository.findById(authUserId);
+        if (movie.isEmpty()) {
+            return ResponseEntity.status(404).body("Movie with Id " + id + " dose not exist");
+        } else if (authUsers.isEmpty()){
+            return ResponseEntity.status(404).body("Movie with Id " + id + " dose not exist");
+        } else {
+            authUsers.get().rateMovie(movie.get(), rating);
+            movie.get().setMovieRating();
+            authUserRepository.save(authUsers.get());
+            movieRepository.save(movie.get());
+        }
+        return ResponseEntity.ok(movie.get().getAverageRating());
     }
 }
