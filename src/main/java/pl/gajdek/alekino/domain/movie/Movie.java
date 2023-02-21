@@ -46,8 +46,8 @@ public class Movie {
     @Min(1)
     @Max(400)
     private int runTimeInMin;
-    @Min(0)
-    @Max(10)
+    @Min(value = 1, message = "rate cant be less than 1")
+    @Max(value = 10, message = "rate cant be grater than 10")
     private Double averageRating;
     @NotNull
     private boolean premiere;
@@ -167,12 +167,10 @@ public class Movie {
 
     public void addRating(int rating){
         if (getRatings() == null) {
-            System.out.println("jak jest null dodaje listęi ocenę");
             List<Integer> ratings = new ArrayList<>();
             ratings.add(rating);
             setRatings(ratings);
         } else {
-            System.out.println(" dodaje ocenę");
             getRatings().add(rating);
         }
 

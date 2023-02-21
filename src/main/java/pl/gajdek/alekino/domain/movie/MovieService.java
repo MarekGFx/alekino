@@ -8,7 +8,6 @@ import pl.gajdek.alekino.domain.authUser.AuthUsers;
 import pl.gajdek.alekino.domain.genere.Genre;
 import pl.gajdek.alekino.domain.genere.GenreRepository;
 import pl.gajdek.alekino.domain.movie.dto.MovieDto;
-import pl.gajdek.alekino.exceptions.DataNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class MovieService {
         if (movie.isEmpty()) {
             return ResponseEntity.status(404).body("Movie not found with id: " + id);
         } else {
-            return ResponseEntity.ok(movie);
+            return ResponseEntity.ok(movie.map(MovieDtoMapper::mapToMovieDto));
         }
     }
 
@@ -72,18 +71,22 @@ public class MovieService {
     }
 
     public ResponseEntity<?> rateMovie(long id, int rating, long authUserId){
-        Optional<Movie> movie = movieRepository.findById(id);
-        Optional<AuthUsers> authUsers = authUserRepository.findById(authUserId);
-        if (movie.isEmpty()) {
-            return ResponseEntity.status(404).body("Movie with Id " + id + " dose not exist");
-        } else if (authUsers.isEmpty()){
-            return ResponseEntity.status(404).body("Movie with Id " + id + " dose not exist");
+        if (rating <= 10 && rating >= 1) {
+            Optional<Movie> movie = movieRepository.findById(id);
+            Optional<AuthUsers> authUsers = authUserRepository.findById(authUserId);
+            if (movie.isEmpty()) {
+                return ResponseEntity.status(404).body("Movie with Id " + id + " dose not exist");
+            } else if (authUsers.isEmpty()) {
+                return ResponseEntity.status(404).body("User with Id " + id + " dose not exist");
+            } else {
+                authUsers.get().rateMovie(movie.get(), rating);
+                movie.get().setMovieRating();
+                authUserRepository.save(authUsers.get());
+                movieRepository.save(movie.get());
+                return ResponseEntity.ok(movie.get().getAverageRating());
+            }
         } else {
-            authUsers.get().rateMovie(movie.get(), rating);
-            movie.get().setMovieRating();
-            authUserRepository.save(authUsers.get());
-            movieRepository.save(movie.get());
+            return ResponseEntity.status(400).body("Rating should be between 1 and 10");
         }
-        return ResponseEntity.ok(movie.get().getAverageRating());
     }
 }

@@ -57,6 +57,9 @@ insert into seat( row_number, seat_number, seats_status, cinema_room_id) values 
 insert into users(email, first_name, last_name, role) values ('email@wp.pl', 'testuser1', 'testuser1', 'USER')
 insert into auth_users(password, user_id) values ('authuser', 1)
 
+insert into users(email, first_name, last_name, role) values ('email2@wp.pl', 'testuser2', 'testuser2', 'USER')
+insert into auth_users(password, user_id) values ('authuser2', 2)
+
 insert into blik(blik_number) values (123456)
 insert into blik(blik_number) values (321654)
 insert into blik(blik_number) values (987432)

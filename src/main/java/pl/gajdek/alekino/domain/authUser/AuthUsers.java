@@ -31,7 +31,7 @@ public class AuthUsers {
     @ElementCollection
     @CollectionTable(name = "user_ratings")
     @MapKeyJoinColumn(name = "movie_id")
-    @Column(name = "rating")
+  //  @Column(name = "rating")
     private Map<Movie, Integer> movieRatings = new HashMap<>();
 
     public boolean hasRatedMovie(Movie movie) {
