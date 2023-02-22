@@ -28,9 +28,6 @@ public class SeatService {
     private SeatRepository seatRepository;
     private CinemaRoomRepository cinemaRoomRepository;
     private ShowingRepository showingRepository;
-    private UserRepository userRepository;
-    private ShoppingCartRepository shoppingCartRepository;
-    private TicketRepository ticketRepository;
 
     public ResponseEntity<?> getSeatsByCinemaRoom(long id) {
         Optional<CinemaRoom> cinemaRoom = cinemaRoomRepository.findById(id);
@@ -59,20 +56,24 @@ public class SeatService {
             seat.setCinemaRoom(cinemaRoom.get());
             seat.setSeatsStatus(getStatus(seatToAdd.getSeatsStatus()));
 
-            for (Seat s : cinemaRoom.get().getSeats()) {
-                if (s.getRowNumber() == seat.getRowNumber() && s.getSeatNumber() == seat.getSeatNumber()) {
-                    return ResponseEntity.status(400).body("Seat in row "
-                            + seat.getRowNumber() + " and number " + seat.getSeatNumber() + " already exist");
+            // zmiana po testach
+            if (cinemaRoom.get().getSeats() != null) {
+                for (Seat s : cinemaRoom.get().getSeats()) {
+                    if (s.getRowNumber() == seat.getRowNumber() && s.getSeatNumber() == seat.getSeatNumber()) {
+                        return ResponseEntity.status(400).body("Seat in row "
+                                + seat.getRowNumber() + " and number " + seat.getSeatNumber() + " already exist");
+                    }
+                }
+
+                if (cinemaRoom.get().getSeats().size() >= cinemaRoom.get().getMaxNumberOfSeats()) {
+                    System.out.println(cinemaRoom.get().getSeats().size());
+                    System.out.println(cinemaRoom.get().getMaxNumberOfSeats());
+                    return ResponseEntity.status(400).body("Maximum number of seats has been reached");
                 }
             }
-
-            if (cinemaRoom.get().getSeats().size() >= cinemaRoom.get().getMaxNumberOfSeats()) {
-                System.out.println(cinemaRoom.get().getSeats().size());
-                System.out.println(cinemaRoom.get().getMaxNumberOfSeats());
-                return ResponseEntity.status(400).body("Maximum number of seats has been reached");
-            }
-
-            if (cinemaRoom.get().getSeats().isEmpty()) {
+// zmiana po testach
+//            if (cinemaRoom.get().getSeats().isEmpty()) {
+            if (cinemaRoom.get().getSeats() == null) {
                 List<Seat> seatsList = new ArrayList<>();
                 seatsList.add(seat);
                 cinemaRoom.get().setSeats(seatsList);
