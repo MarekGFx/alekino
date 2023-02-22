@@ -13,6 +13,7 @@ import pl.gajdek.alekino.enums.validation.ValidateEnum;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class AddSeatToCinemaRoomDto {
 
     @NotNull(message = "row cant be null")

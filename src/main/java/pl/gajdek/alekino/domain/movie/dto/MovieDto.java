@@ -1,12 +1,18 @@
 package pl.gajdek.alekino.domain.movie.dto;
 
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
 
 import java.time.LocalDate;
 
 
+@Setter
+@Getter
+@NoArgsConstructor
 public class MovieDto {
 
     @NotNull(message = "Movie title shouldn't be null")
@@ -30,7 +36,7 @@ public class MovieDto {
     private int runTimeInMin;
     @Min(value = 0, message = "rating shouldn't be less than 0 score")
     @Max(value = 10, message = "rating shouldn't be grater than 10 score")
-    private Double rating;
+    private double rating;
     private boolean premiere;
 
     public MovieDto(String title, String poster, String genre,

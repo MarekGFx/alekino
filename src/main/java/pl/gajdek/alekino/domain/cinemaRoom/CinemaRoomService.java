@@ -16,7 +16,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CinemaRoomService {
 
-
     private CinemaRoomRepository cinemaRoomRepository;
 
     public ResponseEntity<List<?>> getCinemaRooms(){
@@ -44,7 +43,7 @@ public class CinemaRoomService {
             }
             cinemaRoom.setMaxNumberOfSeats(newCinemaRoomDto.getMaxNumberOfSeats());
             cinemaRoomRepository.save(cinemaRoom);
-            return ResponseEntity.status(201).body("New Cinema room has ben added");
+            return ResponseEntity.status(201).body(cinemaRoom);
         }
         else
             return ResponseEntity.status(400).body("Cant add new room");

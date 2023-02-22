@@ -63,9 +63,8 @@ public class MovieService {
         movie.setDescription(movieToSave.getDescription());
         movie.setShortDescription(movieToSave.getShortDescription());
         movie.setReleaseDate(movieToSave.getReleaseDate());
-        movie.setRunTimeInMin(movieToSave.getRunTimeInMin());
-        movie.setMovieRating();
         movie.setPremiere(movieToSave.isPremiere());
+        movie.setRunTimeInMin(movieToSave.getRunTimeInMin());
         movieRepository.save(movie);
         return ResponseEntity.ok(movie);
     }
@@ -80,7 +79,6 @@ public class MovieService {
                 return ResponseEntity.status(404).body("User with Id " + id + " dose not exist");
             } else {
                 authUsers.get().rateMovie(movie.get(), rating);
-                movie.get().setMovieRating();
                 authUserRepository.save(authUsers.get());
                 movieRepository.save(movie.get());
                 return ResponseEntity.ok(movie.get().getAverageRating());

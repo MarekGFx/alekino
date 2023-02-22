@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import pl.gajdek.alekino.domain.genere.Genre;
+import pl.gajdek.alekino.exceptions.NotValidNumberExceptions;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,10 +49,9 @@ public class Movie {
     private int runTimeInMin;
     @Min(value = 1, message = "rate cant be less than 1")
     @Max(value = 10, message = "rate cant be grater than 10")
-    private Double averageRating;
+    private double averageRating;
     @NotNull
     private boolean premiere;
-
     private List<Integer> ratings = new ArrayList<>();
 
     public Long getId() {
@@ -143,7 +143,7 @@ public class Movie {
         return averageRating;
     }
 
-    public void setMovieRating() {
+    private void setMovieRating() {
         double sumRating;
         if (ratings.isEmpty()){
             sumRating = 0.0;
@@ -166,12 +166,17 @@ public class Movie {
     }
 
     public void addRating(int rating){
+        if (rating < 1 || rating > 10) {
+            throw new NotValidNumberExceptions("rating should be between 1 and 10 score");
+        }
         if (getRatings() == null) {
             List<Integer> ratings = new ArrayList<>();
             ratings.add(rating);
             setRatings(ratings);
+            setMovieRating();
         } else {
             getRatings().add(rating);
+            setMovieRating();
         }
 
     }
