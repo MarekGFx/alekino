@@ -73,11 +73,6 @@ class ShowingSeatServiceTest {
 
     @Test
     void addSeatToTicket() {
-        User user = new User();
-        user.setId(1L);
-        user.setFirstName("Test");
-        user.setLastName("TestTest");
-        user.setEmail("email@wp.pl");
 
         Movie movie = new Movie();
         movie.setId(1L);
@@ -110,7 +105,6 @@ class ShowingSeatServiceTest {
         when(session.getAttribute("shopping_cart_id")).thenReturn(shoppingCartId);
 
         when(movieRepository.findById(1L)).thenReturn(Optional.of(movie));
-        when(userRepository.findByEmail("email@wp.pl")).thenReturn(Optional.of(user));
         when(showingRepository.findById(1L)).thenReturn(Optional.of(showing));
         when(seatRepository.findById(1L)).thenReturn(Optional.of(seat));
 

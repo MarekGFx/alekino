@@ -36,7 +36,7 @@ public class MovieDto {
     private int runTimeInMin;
     @Min(value = 0, message = "rating shouldn't be less than 0 score")
     @Max(value = 10, message = "rating shouldn't be grater than 10 score")
-    private double rating;
+    private Double rating;
     private boolean premiere;
 
     public MovieDto(String title, String poster, String genre,
