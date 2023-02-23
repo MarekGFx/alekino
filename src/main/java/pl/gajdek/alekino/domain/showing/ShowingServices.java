@@ -130,15 +130,19 @@ public class ShowingServices {
         List<Seat> seatList = cinemaRoom.getSeats();
         List<ShowingSeat> showingSeatList = new ArrayList<>();
 
-        for (Seat seat : seatList) {
-            ShowingSeat showingSeat = showingSeatDtoMapper.mapFromSeatToShowingSeat(seat, showing);
-            showingSeatRepository.save(showingSeat);
-            showingSeatList.add(showingSeat);
-        }
+        if (seatList != null) {  // po testach
+            for (Seat seat : seatList) {
+                ShowingSeat showingSeat = showingSeatDtoMapper.mapFromSeatToShowingSeat(seat, showing);
+                showingSeatRepository.save(showingSeat);
+                showingSeatList.add(showingSeat);
+            }
 
-        showing.setSeats(showingSeatList);
-        showingRepository.save(showing);
-        return ResponseEntity.status(201).body("Show successful created");
+            showing.setSeats(showingSeatList);
+            showingRepository.save(showing);
+            return ResponseEntity.status(201).body("Show successful created");
+        }
+        else
+            return ResponseEntity.status(404).body("Cinema room does not have any seats");
     }
 
     private int getHourFromMovieRunTime(int time){
@@ -148,7 +152,4 @@ public class ShowingServices {
     private int getMinFromMovieRunTime(int time){
         return time - (getHourFromMovieRunTime(time) * ConstantDataForCinema.HOUR_IN_MIN);
     }
-
-
-
 }

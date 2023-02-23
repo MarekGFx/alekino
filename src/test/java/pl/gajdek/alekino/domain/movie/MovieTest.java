@@ -4,26 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.mockito.Mockito;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import pl.gajdek.alekino.domain.genere.Genre;
 import pl.gajdek.alekino.exceptions.NotValidNumberExceptions;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.when;
 
-//@RunWith(MockitoJUnitRunner.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MovieTest {
 
@@ -48,18 +34,6 @@ public class MovieTest {
         movie.setRunTimeInMin(120);
     }
 
-//    @Mock
-//    private List<Integer> ratings;
-//
-//    @Before
-//    public void setup() {
-//        when(ratings.isEmpty()).thenReturn(false);
-//        when(ratings.size()).thenReturn(3);
-//        when(ratings.get(0)).thenReturn(5);
-//        when(ratings.get(1)).thenReturn(7);
-//        when(ratings.get(2)).thenReturn(9);
-//    }
-
     @Test
     public void testAddRating() {
 
@@ -79,19 +53,3 @@ public class MovieTest {
     }
 
 }
-
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-//class MovieTest {
-//
-//    @BeforeAll
-//    void init() {
-//        MockitoAnnotations.openMocks(this);
-//    }
-//
-//    @Test
-//    void addRating(){
-//        Movie movie = Mockito.mock(Movie.class);
-//        movie.addRating(6);
-//        assertEquals(1.0,movie.getMovieRating());
-//    }
-//}

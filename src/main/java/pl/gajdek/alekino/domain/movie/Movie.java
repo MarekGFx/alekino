@@ -49,7 +49,7 @@ public class Movie {
     private int runTimeInMin;
     @Min(value = 1, message = "rate cant be less than 1")
     @Max(value = 10, message = "rate cant be grater than 10")
-    private double averageRating;
+    private Double averageRating;
     @NotNull
     private boolean premiere;
     private List<Integer> ratings = new ArrayList<>();
